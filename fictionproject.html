@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiction Archive - My Projects</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_project.css">
+    <link rel="stylesheet" href="profilestyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Fiction Archive</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="homepage.html" class="menu-item"><span>🏠</span> Homepage</a>
+                <a href="fictionproject.html" class="menu-item active"><span>📚</span> Fiction projects</a>
+                <a href="characters.html" class="menu-item"><span>👥</span> Characters</a>
+                <a href="worldbuilding.html" class="menu-item"><span>🌍</span> Worldbuilding</a>
+                <a href="#" class="menu-item"><span>⏳</span> Timeline</a>
+                <a href="#" class="menu-item"><span>💾</span> สำรองข้อมูล</a>
+            </nav>
+            <div class="sidebar-footer">
+                <!-- ส่วนโปรไฟล์ผู้ใช้งานที่มี Dropdown เพิ่มเข้ามา -->
+                <div class="user-profile">
+                    <div class="avatar">U</div>
+                    <div class="user-info">
+                        <span class="username">Specimen 1</span>
+                        <span class="role">ผู้ใช้งาน</span>
+                    </div>
+
+                    <!-- ส่วนหน้าต่าง Dropdown Menu -->
+                    <div class="profile-dropdown">
+                        <a href="profile.html" class="dropdown-item">
+                            <span>👤</span> โปรไฟล์ (Profile)
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <span>⚙️</span> การตั้งค่า
+                        </a>
+                        <hr style="border: 0; border-top: 1px solid #142126; margin: 6px 0;">
+                        <a href="login.html" class="dropdown-item logout-item" id="btn-logout">
+                            <span>🚪</span> ออกจากระบบ
+                        </a>
+                    </div>
+            </div>
+        </aside>
+
+        <main class="main-content" style="grid-column: span 2;">
+            <header class="main-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="ค้นหาชื่อโปรเจกต์นิยาย...">
+                </div>
+                <button class="btn-create">+ New Project</button>
+            </header>
+
+            <section class="section-header">
+                <div>
+                    <h2 style="color: #ffffff; font-size: 1.6rem; margin-bottom: 4px;">โปรเจกต์ทั้งหมด</h2>
+                    <p style="color: #8a8a8a; font-size: 0.9rem;">จัดการคลังข้อมูลทั้งหมดของคุณ</p>
+                </div>
+            </section>
+
+            <div class="filter-container">
+                <button class="btn-filter active">ทั้งหมด (3)</button>
+                <button class="btn-filter">Fantasy</button>
+                <button class="btn-filter">Drama</button>
+                <button class="btn-filter">Sci-Fi</button>
+            </div>
+
+            <div class="projects-grid">
+                
+                <div class="pc-project-card">
+                    <div class="card-cover fantasy"></div>
+                    <div class="card-body">
+                        <h4>Name 1</h4>
+                        <p class="desc">Description</p>
+                        
+                        <div class="project-meta-info">
+                            <div class="meta-item">👥 ตัวละคร: 8</div>
+                            <div class="meta-item">🌍 สถานที่: 4</div>
+                            <div class="meta-item">✨ พลังวิเศษ: 2</div>
+                            <div class="meta-item">📝 บทนิยาย: 15</div>
+                        </div>
+
+                        <div class="card-footer">
+                            <span class="time">อัปเดตล่าสุด: 2 ชม. ที่แล้ว</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pc-project-card">
+                    <div class="card-cover drama"></div>
+                    <div class="card-body">
+                        <h4>Name 2</h4>
+                        <p class="desc">Description</p>
+                        <div class="project-meta-info">
+                            <div class="meta-item">👥 ตัวละคร: 12</div>
+                            <div class="meta-item">🌍 สถานที่: 3</div>
+                            <div class="meta-item">✨ พลังวิเศษ: 0</div>
+                            <div class="meta-item">📝 บทนิยาย: 8</div>
+                        </div>
+
+                        <div class="card-footer">
+                            <span class="time">อัปเดตล่าสุด: วานนี้</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pc-project-card">
+                    <div class="card-cover" style="background: linear-gradient(to bottom, #1f2937, #121212);"></div>
+                    <div class="card-body">
+                        <h4>โปรเจกต์ทดลองเขียน</h4>
+                        <p class="desc">ทั่วไป</p>
+                        
+                        <div class="project-meta-info">
+                            <div class="meta-item">👥 ตัวละคร: 2</div>
+                            <div class="meta-item">🌍 สถานที่: 1</div>
+                            <div class="meta-item">✨ พลังวิเศษ: 1</div>
+                            <div class="meta-item">📝 บทนิยาย: 0</div>
+                        </div>
+
+                        <div class="card-footer">
+                            <span class="time">อัปเดตล่าสุด: 4 วันที่แล้ว</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+</body>
+</html>

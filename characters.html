@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiction Archive - จัดการตัวละคร</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_char.css">
+    <link rel="stylesheet" href="profilestyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Fiction Archive</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="homepage.html" class="menu-item"><span>🏠</span> Homepage</a>
+                <a href="fictionproject.html" class="menu-item"><span>📚</span> Fiction projects</a>
+                <a href="characters.html" class="menu-item active"><span>👥</span> Characters</a>
+                <a href="worldbuilding.html" class="menu-item"><span>🌍</span> Worldbuilding</a>
+                <a href="#" class="menu-item"><span>⏳</span> Timeline เรื่อง</a>
+                <a href="#" class="menu-item"><span>💾</span> สำรองข้อมูล Cloud</a>
+            </nav>
+            <div class="sidebar-footer">
+                <!-- ส่วนโปรไฟล์ผู้ใช้งานที่มี Dropdown เพิ่มเข้ามา -->
+                <div class="user-profile">
+                    <div class="avatar">U</div>
+                    <div class="user-info">
+                        <span class="username">Specimen 1</span>
+                        <span class="role">ผู้ใช้งาน</span>
+                    </div>
+
+                    <!-- ส่วนหน้าต่าง Dropdown Menu -->
+                    <div class="profile-dropdown">
+                        <a href="profile.html" class="dropdown-item">
+                            <span>👤</span> โปรไฟล์ (Profile)
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <span>⚙️</span> การตั้งค่า
+                        </a>
+                        <hr style="border: 0; border-top: 1px solid #142126; margin: 6px 0;">
+                        <a href="login.html" class="dropdown-item logout-item" id="btn-logout">
+                            <span>🚪</span> ออกจากระบบ
+                        </a>
+                    </div>
+            </div>
+        </aside>
+
+        <main class="main-content" style="grid-column: span 2;">
+            <header class="main-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="ค้นหาชื่อตัวละคร, เผ่าพันธุ์, หรือความสามารถ...">
+                </div>
+                <button class="btn-create">+ เพิ่มตัวละครใหม่</button>
+            </header>
+
+            <section class="section-header">
+                <div>
+                    <h2 style="color: #ffffff; font-size: 1.6rem; margin-bottom: 4px;">"Sample" - Characters</h2>
+                    <p style="color: #657e85; font-size: 0.9rem;">จัดการข้อมูลตัวละคร ประวัติ ความสามารถพิเศษ และระบบความสัมพันธ์</p>
+                </div>
+            </section>
+
+            <div class="filter-container">
+                <button class="btn-filter active">ตัวละครทั้งหมด (3)</button>
+                <button class="btn-filter">ตัวละครเอก (Main)</button>
+                <button class="btn-filter">ตัวละครสมทบ (Supporting)</button>
+                <button class="btn-filter">ฝ่ายตรงข้าม (Antagonist)</button>
+            </div>
+
+            <div class="character-grid">
+                
+                <div class="character-card">
+                    <div class="char-header" style="background: linear-gradient(to bottom, rgba(0,0,0,0.1), #0b1114), url('https://via.placeholder.com/140') center/cover;">
+                        <div class="char-avatar-container">
+                            <div class="char-avatar">G</div>
+                            <div class="char-title-meta">
+                                <h4 class="char-name">The Good</h4>
+                                <span class="char-role">ตัวละครเอก (Main Protagonist)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="char-body">
+                        <p class="char-desc">คำอธิบายสำหรับตัวเอก.txt</p>
+                        <div class="char-details">
+                            <span class="detail-badge highlight">เผ่าพันธุ์: [goes here]</span>
+                            <span class="detail-badge highlight">สังกัด: [goes here]</span>
+                            <span class="detail-badge highlight">ความสามารถ: [goes here]</span>
+                        </div>
+                    </div>
+                    <div class="char-actions">
+                        <button class="btn-action">✏️ แก้ไข</button>
+                        <button class="btn-action">🔗 ความสัมพันธ์</button>
+                        <button class="btn-action delete">🗑️ ลบ</button>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="char-header" style="background: linear-gradient(to bottom, rgba(0,0,0,0.1), #0b1114), url('https://via.placeholder.com/140') center/cover;">
+                        <div class="char-avatar-container">
+                            <div class="char-avatar">B</div>
+                            <div class="char-title-meta">
+                                <h4 class="char-name">The Bad</h4>
+                                <span class="char-role">ฝ่ายตรงข้าม (Antagonist)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="char-body">
+                        <p class="char-desc">คำอธิบายสำหรับศัตรู.txt</p>
+                        <div class="char-details">
+                            <span class="detail-badge highlight">เผ่าพันธุ์: [goes here]</span>
+                            <span class="detail-badge highlight">สังกัด: [goes here]</span>
+                            <span class="detail-badge highlight">ความสามารถ: [goes here]</span>
+                        </div>
+                    </div>
+                    <div class="char-actions">
+                        <button class="btn-action">✏️ แก้ไข</button>
+                        <button class="btn-action">🔗 ความสัมพันธ์</button>
+                        <button class="btn-action delete">🗑️ ลบ</button>
+                    </div>
+                </div>
+
+                <div class="character-card">
+                    <div class="char-header" style="background: linear-gradient(to bottom, rgba(0,0,0,0.1), #0b1114), url('https://via.placeholder.com/140') center/cover;">
+                        <div class="char-avatar-container">
+                            <div class="char-avatar">U</div>
+                            <div class="char-title-meta">
+                                <h4 class="char-name">The Ugly</h4>
+                                <span class="char-role">ตัวละครสมทบ (Supporting)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="char-body">
+                        <p class="char-desc">คำอธิบายสำหรับตัวละครสมทบ.txt</p>
+                        <div class="char-details">
+                            <span class="detail-badge highlight">เผ่าพันธุ์: [goes here]</span>
+                            <span class="detail-badge highlight">สังกัด: [goes here]</span>
+                            <span class="detail-badge highlight">ความสามารถ: [goes here]</span>
+                        </div>
+                    </div>
+                    <div class="char-actions">
+                        <button class="btn-action">✏️ แก้ไข</button>
+                        <button class="btn-action">🔗 ความสัมพันธ์</button>
+                        <button class="btn-action delete">🗑️ ลบ</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <!-- ---------------- MODALS ---------------- -->
+
+    <!-- Modal 1: สร้าง / แก้ไข ตัวละคร -->
+    <div class="modal-overlay" id="char-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modal-title">เพิ่มตัวละครใหม่</h3>
+                <button class="btn-close-modal" class="close-modal">&times;</button>
+            </div>
+            <form id="char-form">
+                <input type="hidden" id="char-id">
+                <div class="form-group">
+                    <label>ชื่อตัวละคร</label>
+                    <input type="text" id="char-name" required placeholder="เช่น อาเธอร์ เวนส์">
+                </div>
+                <div class="form-group">
+                    <label>บทบาท</label>
+                    <select id="char-role">
+                        <option value="ตัวละครเอก (Main)">ตัวละครเอก (Main)</option>
+                        <option value="ตัวละครสมทบ (Supporting)">ตัวละครสมทบ (Supporting)</option>
+                        <option value="ฝ่ายตรงข้าม (Antagonist)">ฝ่ายตรงข้าม (Antagonist)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>เผ่าพันธุ์</label>
+                    <input type="text" id="char-race" placeholder="เช่น มนุษย์, เอลฟ์">
+                </div>
+                <div class="form-group">
+                    <label>ความสามารถพิเศษ</label>
+                    <input type="text" id="char-ability" placeholder="เช่น เวทมนตร์ลวงตา">
+                </div>
+                <div class="form-group">
+                    <label>ประวัติย่อ</label>
+                    <textarea id="char-desc" rows="3" placeholder="รายละเอียดเบื้องต้น..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel close-modal">ยกเลิก</button>
+                    <button type="submit" class="btn-submit">บันทึกข้อมูล</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 2: จัดการความสัมพันธ์ -->
+    <div class="modal-overlay" id="rel-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>จัดการความสัมพันธ์</h3>
+                <button class="btn-close-modal close-modal">&times;</button>
+            </div>
+            <form id="rel-form">
+                <input type="hidden" id="rel-source-id">
+                <div class="form-group">
+                    <label>ตัวละครหลัก</label>
+                    <input type="text" id="rel-source-name" readonly style="opacity: 0.7;">
+                </div>
+                <div class="form-group">
+                    <label>ความสัมพันธ์กับ</label>
+                    <select id="rel-target-id" required>
+                        <!-- ดึงรายชื่อตัวละครอื่นผ่าน JS -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ประเภทความสัมพันธ์</label>
+                    <input type="text" id="rel-type" required placeholder="เช่น ศัตรูคู่แค้น, ศิษย์-อาจารย์, พันธมิตร">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel close-modal">ยกเลิก</button>
+                    <button type="submit" class="btn-submit">บันทึกความสัมพันธ์</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="charmanage.js"></script>
+
+</body>
+</html>

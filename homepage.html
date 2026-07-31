@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiction Archive - Dashboard (PC)</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profilestyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Fiction Archive</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="homepage.html" class="menu-item active"><span>🏠</span> Homepage</a>
+                <a href="fictionproject.html" class="menu-item"><span>📚</span> Fiction projects</a>
+                <a href="characters.html" class="menu-item"><span>👥</span> Characters</a>
+                <a href="worldbuilding.html" class="menu-item"><span>🌍</span> Worldbuilding</a>
+                <a href="#" class="menu-item"><span>⏳</span> Timeline</a>
+                <a href="#" class="menu-item"><span>💾</span> สำรองข้อมูล</a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <!-- ส่วนโปรไฟล์ผู้ใช้งานที่มี Dropdown เพิ่มเข้ามา -->
+                <div class="user-profile">
+                    <div class="avatar">U</div>
+                    <div class="user-info">
+                        <span class="username">Specimen 1</span>
+                        <span class="role">ผู้ใช้งาน</span>
+                    </div>
+
+                    <!-- ส่วนหน้าต่าง Dropdown Menu -->
+                    <div class="profile-dropdown">
+                        <a href="profile.html" class="dropdown-item">
+                            <span>👤</span> โปรไฟล์ (Profile)
+                        </a>
+                        <a href="settings.html" class="dropdown-item">
+                            <span>⚙️</span> การตั้งค่า
+                        </a>
+                        <hr style="border: 0; border-top: 1px solid #142126; margin: 6px 0;">
+                        <a href="login.html" class="dropdown-item logout-item" id="btn-logout">
+                            <span>🚪</span> ออกจากระบบ
+                        </a>
+                    </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="search-bar">
+                    <input type="text" placeholder="ค้นหาข้อมูล ตัวละคร, สถานที่, บันทึก...">
+                </div>
+                <button class="btn-create">+ New Project</button>
+            </header>
+
+            <section class="welcome-banner">
+                <h1>Welcome</h1>
+                <p>Back to your Archive</p>
+            </section>
+
+            <section class="projects-grid-section">
+                <div class="section-header">
+                    <h3>Your Projects</h3>
+                    <a href="fictionproject.html" class="link-more">ดูทั้งหมด</a>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="pc-project-card">
+                        <div class="card-cover fantasy"></div>
+                        <div class="card-body">
+                            <h4>Sample 1</h4>
+                            <p class="desc">Genre | Description</p>
+                            <div class="card-footer">
+                                <span class="time">อัปเดตล่าสุด: 2 ชม. ที่แล้ว</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pc-project-card">
+                        <div class="card-cover drama"></div>
+                        <div class="card-body">
+                            <h4>Sample 2</h4>
+                            <p class="desc">Genre | Description</p>
+                            <div class="card-footer">
+                                <span class="time">อัปเดตล่าสุด: วานนี้</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <aside class="right-panel">
+            <div class="widget">
+                <h4>คลังข้อมูลภาพรวม</h4>
+                <div class="stat-item">
+                    <span class="stat-label">โปรเจกต์รวม</span>
+                    <span class="stat-value">2</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">ตัวละครทั้งหมด</span>
+                    <span class="stat-value">16</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">ข้อมูล Worldbuilding</span>
+                    <span class="stat-value">5 เมือง / 2 เผ่าพันธ์</span>
+                </div>
+            </div>
+
+            <div class="widget">
+                <h4>บันทึกสั้น / กิจกรรมล่าสุด</h4>
+                <ul class="activity-list">
+                    <li>🟢 เพิ่มความสัมพันธ์ตัวละคร 'Dude1' กับ 'Dude2'</li>
+                    <li>🟢 เพิ่มสถานที่ใหม่ 'มหานคร thingy'</li>
+                    <li>🔵 สำรองข้อมูลขึ้นคลาวด์สำเร็จ (10:45 น.)</li>
+                </ul>
+            </div>
+        </aside>
+
+    </div>
+
+</body>
+</html>

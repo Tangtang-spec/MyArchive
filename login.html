@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiction Archive - Log In</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<!-- เรียกใช้ไฟล์สคริปต์แยก (ต้องระบุ type="module") -->
+    <script type="module" src="login.js"></script>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            
+            <div class="auth-header">
+                <h2>Fiction Archive</h2>
+                <p>ยินดีต้อนรับกลับมานักสร้างสรรค์โลก</p>
+            </div>
+
+            <form action="homepage.html">
+                <div class="form-group">
+                    <label for="email">อีเมลผู้ใช้งาน</label>
+                    <input type="email" id="email" placeholder="example@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">รหัสผ่าน</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+
+                <div class="auth-options">
+                    <label class="remember-me">
+                        <input type="checkbox"> จดจำฉันในระบบ
+                    </label>
+                    <a href="#" class="forgot-pass">ลืมรหัสผ่าน?</a>
+                </div>
+
+                <button type="submit" class="btn-auth">เข้าสู่ระบบ</button>
+            </form>
+
+            <div class="auth-divider">หรือทำรายการต่อด้วย</div>
+            
+            <button type="button" class="btn-google">
+                <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/web-24dp/logo_googleg_color_24dp.png" alt="Google Logo">
+                เข้าสู่ระบบด้วย Google
+            </button>
+
+            <div class="auth-footer">
+                ยังไม่มีบัญชีใช่ไหม? <a href="register.html">สมัครสมาชิกที่นี่</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

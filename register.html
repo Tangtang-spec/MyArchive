@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiction Archive - Register</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<!-- เรียกใช้ไฟล์สคริปต์แยก (ต้องระบุ type="module") -->
+    <script type="module" src="register.js"></script>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            
+            <div class="auth-header">
+                <h2>สร้างบัญชีใหม่</h2>
+                <p>เริ่มต้นก้าวแรกของการสร้างสรรค์คลังข้อมูลนิยาย</p>
+            </div>
+
+            <form action="login.html">
+                <div class="form-group">
+                    <label for="username">ชื่อผู้ใช้งาน หรือ นนามปากกา</label>
+                    <input type="text" id="username" placeholder="กรอกชื่อผู้ใช้ของคุณ" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">อีเมล</label>
+                    <input type="email" id="email" placeholder="example@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">รหัสผ่าน</label>
+                    <input type="password" id="password" placeholder="กำหนดรหัสผ่านอย่างน้อย 8 ตัวอักษร" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">ยืนยันรหัสผ่านอีกครั้ง</label>
+                    <input type="password" id="confirm-password" placeholder="••••••••" required>
+                </div>
+
+                <label class="terms-condition">
+                    <input type="checkbox" required> ฉันได้อ่านและยอมรับข้อตกลงการใช้งาน และนโยบายความเป็นส่วนตัวของ Fiction Archive เรียบร้อยแล้ว
+                </label>
+
+                <button type="submit" class="btn-auth">สมัครสมาชิก</button>
+            </form>
+
+            <div class="auth-divider">หรือทำรายการต่อด้วย</div>
+            
+            <button type="button" class="btn-google">
+                <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/web-24dp/logo_googleg_color_24dp.png" alt="Google Logo">
+                เข้าสู่ระบบด้วย Google
+            </button>
+
+            <div class="auth-footer">
+                มีบัญชีผู้ใช้อยู่แล้วใช่ไหม? <a href="login.html">เข้าสู่ระบบได้ที่นี่</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+/* ========================================================
+           เพิ่มสไตล์สำหรับระบบ User Profile Dropdown (ธีมมืดนีออน)
+           ======================================================== */
+        
+        /* ตั้งค่าให้กล่องโปรไฟล์เป็นตัวยึดตำแหน่ง */
+        .user-profile {
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        /* เอฟเฟกต์เมื่อ Hover ที่ตัวโปรไฟล์หลัก */
+        .user-profile:hover {
+            background-color: #142126;
+        }
+
+        /* ตัวกล่องหน้าต่าง Dropdown (ซ่อนไว้เริ่มต้น และให้ลอยขึ้นด้านบน) */
+        .profile-dropdown {
+            position: absolute;
+            bottom: calc(100% + 12px); /* ลอยอยู่เหนือปุ่มโปรไฟล์ 12px */
+            left: 0;
+            width: 100%;
+            background-color: #0b1114;
+            border: 1px solid #142126;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(14, 241, 241, 0.1);
+            padding: 8px 0;
+            z-index: 100;
+            
+            /* ทำ Animation ค่อย ๆ โผล่ตอน Hover */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.2s ease-in-out;
+        }
+
+        /* ลูกศรชี้ลงขนาดเล็กด้านล่างของ Dropdown เพิ่มความกริบ */
+        .profile-dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 24px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: #0b1114 transparent transparent transparent;
+        }
+
+        /* สั่งให้โผล่มาเมื่อเมาส์ Hover อยู่เหนือ .user-profile */
+        .user-profile:hover .profile-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* สไตล์ของแต่ละปุ่มเมนูข้างใน */
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            color: #e0e9eb;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        /* เมื่อเมาส์ชี้เมนูย่อย */
+        .dropdown-item:hover {
+            background-color: #142126;
+            color: #0EF1F1;
+        }
+
+        /* สไตล์พิเศษสำหรับปุ่มออกจากระบบ (สีแดงส้มเตือนใจ) */
+        .dropdown-item.logout-item:hover {
+            background-color: rgba(255, 74, 74, 0.1);
+            color: #ff4a4a;
+        }

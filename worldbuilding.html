@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiction Archive - Worldbuilding Manager</title>
+    <!-- เชื่อมโยงไฟล์ CSS หลักธีม Cyber Neon -->
+    <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="styleworldbuild.css">
+    <!-- นำเข้า Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+    
+</head>
+<body>
+
+    <div class="dashboard-container">
+        
+        <!-- 1. Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Fiction Archive</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="homepage.html" class="menu-item"><span>🏠</span> Homepage</a>
+                <a href="fictionproject.html" class="menu-item"><span>📚</span> Fiction projects</a>
+                <a href="characters.html" class="menu-item active"><span>👥</span> Characters</a>
+                <a href="worldbuilding.html" class="menu-item"><span>🌍</span> Worldbuilding</a>
+                <a href="#" class="menu-item"><span>⏳</span> Timeline เรื่อง</a>
+                <a href="#" class="menu-item"><span>💾</span> สำรองข้อมูล Cloud</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">U</div>
+                    <div class="user-info">
+                        <span class="username">นักเขียนสาธิต</span>
+                        <span class="role">ผู้ใช้งาน</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 2. Main Content Area -->
+        <main class="main-content" style="grid-column: span 2;">
+            
+            <!-- Header Search & Actions -->
+            <header class="main-header">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" onkeyup="searchWorldItems()" placeholder="ค้นหาข้อมูลสถานที่, ศาสนา, ระบบพลัง...">
+                </div>
+                <button class="btn-create" onclick="openModal()">+ เพิ่มข้อมูล Worldbuilding</button>
+            </header>
+
+            <!-- Page Title -->
+            <section class="section-header">
+                <div>
+                    <h2 style="color: #ffffff; font-size: 1.6rem; margin-bottom: 4px;">คลังข้อมูล Worldbuilding</h2>
+                    <p style="color: #7b8e91; font-size: 0.9rem;">จัดการรายละเอียดสถานที่ เผ่าพันธุ์ วัฒนธรรม และระบบพลังวิเศษในเรื่อง</p>
+                </div>
+            </section>
+
+            <!-- Category Tabs (อิงตามขอบเขตของระบบ SDLC) -->
+            <div class="wb-tabs">
+                <button class="tab-btn active" onclick="filterCategory('all', this)">ทั้งหมด</button>
+                <button class="tab-btn" onclick="filterCategory('location', this)">🏰 ประเทศ/เมือง/สถานที่</button>
+                <button class="tab-btn" onclick="filterCategory('power', this)">✨ ระบบพลังวิเศษ</button>
+                <button class="tab-btn" onclick="filterCategory('culture', this)">📜 วัฒนธรรม/ศาสนา/ภาษา</button>
+                <button class="tab-btn" onclick="filterCategory('tech', this)">⚙️ เทคโนโลยี/ระบบเงิน</button>
+                <button class="tab-btn" onclick="filterCategory('history', this)">🏛️ ประวัติศาสตร์</button>
+            </div>
+
+            <!-- Worldbuilding Items Grid -->
+            <div class="projects-grid" id="worldGrid">
+                
+                <!-- Item 1: Location -->
+                <div class="pc-project-card wb-card" data-category="location">
+                    <div class="card-cover fantasy"></div>
+                    <div class="card-body">
+                        <span style="color: #0EF1F1; font-size: 0.75rem; font-weight: 600;">[สถานที่]</span>
+                        <h4 class="wb-title">มหาอาณาจักรแอสทาเรีย</h4>
+                        <p class="desc">ศูนย์กลางเศรษฐกิจทางตอนเหนือ ปกครองด้วยระบบสภาเวทมนตร์ มีกำแพงหินเวทมนตร์ล้อมรอบ</p>
+                        <div class="card-footer">อัปเดตล่าสุด: 3 ชม. ที่แล้ว</div>
+                    </div>
+                </div>
+
+                <!-- Item 2: Power System -->
+                <div class="pc-project-card wb-card" data-category="power">
+                    <div class="card-cover" style="background: linear-gradient(to bottom, #002b3d, #0b1114);"></div>
+                    <div class="card-body">
+                        <span style="color: #0EF1F1; font-size: 0.75rem; font-weight: 600;">[ระบบพลังวิเศษ]</span>
+                        <h4 class="wb-title">เวทมนตร์ละอองดวงดาว (Aetherium)</h4>
+                        <p class="desc">ระบบพลังที่ดึงละอองดาวจากชั้นบรรยากาศมาแปลงเป็นมานา แบ่งออกเป็น 5 ธาตุหลัก</p>
+                        <div class="card-footer">อัปเดตล่าสุด: วานนี้</div>
+                    </div>
+                </div>
+
+                <!-- Item 3: Culture -->
+                <div class="pc-project-card wb-card" data-category="culture">
+                    <div class="card-cover" style="background: linear-gradient(to bottom, #004d4d, #0b1114);"></div>
+                    <div class="card-body">
+                        <span style="color: #0EF1F1; font-size: 0.75rem; font-weight: 600;">[ศาสนา/ความเชื่อ]</span>
+                        <h4 class="wb-title">ภาคีแห่งสุริยันส่องแสง</h4>
+                        <p class="desc">ศาสนาหลักที่นับถือดวงอาทิตย์ เชื่อว่าแสงสว่างจะช่วยขจัดความมืดมิดในจิตใจมนุษย์</p>
+                        <div class="card-footer">อัปเดตล่าสุด: 2 วันที่แล้ว</div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- 3. Modal Form สำหรับเพิ่มข้อมูลใหม่ -->
+    <div class="modal-overlay" id="addModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>+ เพิ่มข้อมูล Worldbuilding ใหม่</h3>
+                <button class="close-btn" onclick="closeModal()">✕</button>
+            </div>
+            <form id="wbForm" onsubmit="saveWorldItem(event)">
+                <div class="form-group">
+                    <label>ชื่อหัวข้อ/องค์ประกอบ</label>
+                    <input type="text" id="itemTitle" placeholder="เช่น เมืองท่าเอลดอราโด, ระบบธาตุคู่" required>
+                </div>
+                <div class="form-group">
+                    <label>หมวดหมู่</label>
+                    <select id="itemCategory">
+                        <option value="location">ประเทศ / เมือง / สถานที่</option>
+                        <option value="power">ระบบพลังวิเศษ</option>
+                        <option value="culture">วัฒนธรรม / ศาสนา / ภาษา</option>
+                        <option value="tech">เทคโนโลยี / ระบบเงิน</option>
+                        <option value="history">ประวัติศาสตร์</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>รายละเอียดสังเขป</label>
+                    <textarea id="itemDesc" rows="4" placeholder="ระบุรายละเอียดสำคัญขององค์ประกอบนี้..." required></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModal()">ยกเลิก</button>
+                    <button type="submit" class="btn-save">บันทึกข้อมูล</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="worldbuildingscript.js"></script>
+
+</body>
+</html>
