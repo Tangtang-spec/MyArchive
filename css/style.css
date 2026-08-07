@@ -1,0 +1,293 @@
+/* --- CSS Reset & Base --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Sarabun', sans-serif;
+    background-color: #050b0c; /* สีดำโทนน้ำเงิน-เขียวเข้มลึกมาก เพื่อให้เข้ากับสีเรืองแสง */
+    color: #b2c4c7; /* สีตัวอักษรเทาอมฟ้าอ่อน สบายตา */
+    overflow-x: hidden;
+}
+
+/* --- Layout Container (3 Columns) --- */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 260px 1fr 320px; 
+    height: 100vh;
+}
+
+/* --- 1. Sidebar Navigation --- */
+.sidebar {
+    background-color: #0b1114; /* สีเทาเข้มโทนเย็น */
+    color: #e0e9eb;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    border-right: 1px solid #142126; /* เส้นขอบโทนเขียว-น้ำเงินเข้ม */
+}
+
+.sidebar-brand h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #0EF1F1; /* สีฟ้าเรืองแสงหลักของแบรนด์ */
+    text-shadow: 0 0 12px rgba(14, 241, 241, 0.5); /* เอฟเฟกต์เรืองแสงนีออน */
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 40px;
+    flex-grow: 1;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: #657e85; /* สีเมนูปกติเทาหม่น */
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.menu-item:hover {
+    background-color: #111e24;
+    color: #0EF1F1; /* เปลี่ยนเป็นสีฟ้าเรืองแสงเมื่อ Hover */
+}
+
+.menu-item.active {
+    background-color: rgba(14, 241, 241, 0.15); /* พื้นหลังเมนูแบบโปร่งแสงสีฟ้า */
+    color: #0EF1F1;
+    border-left: 4px solid #0EF1F1; /* เส้นขอบซ้ายเน้นเมนูที่ใช้งาน */
+    font-weight: 600;
+}
+
+.sidebar-footer {
+    border-top: 1px solid #142126;
+    padding-top: 16px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #0EF1F1; /* อวตารผู้ใช้สีฟ้าเรืองแสง */
+    color: #050b0c; /* ตัวอักษรสีเข้มเพื่อตัดกัน */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(14, 241, 241, 0.3);
+}
+
+.username {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.role {
+    font-size: 0.75rem;
+    color: #657e85;
+}
+
+/* --- 2. Main Content Area --- */
+.main-content {
+    background-color: #050b0c; 
+    padding: 32px;
+    overflow-y: auto;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.search-bar input {
+    width: 400px;
+    padding: 10px 16px;
+    background-color: #0b1114;
+    border: 1px solid #142126;
+    border-radius: 8px;
+    outline: none;
+    font-size: 0.9rem;
+    color: #ffffff;
+    transition: border 0.2s;
+}
+
+.search-bar input:focus {
+    border-color: #0EF1F1; /* ขอบเปลี่ยนเป็นสีฟ้าเรืองแสงเมื่อโฟกัส */
+    box-shadow: 0 0 8px rgba(14, 241, 241, 0.2);
+}
+
+.btn-create {
+    background-color: #0EF1F1; /* ปุ่มสร้างหลักสีฟ้าเรืองแสง */
+    color: #050b0c; /* อักษรด้านในสีเข้มเพื่อให้มองเห็นชัดเจน */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn-create:hover {
+    background-color: #00d6d6; /* ดรอปความสว่างลงเล็กน้อยตอน Hover */
+    box-shadow: 0 0 15px rgba(14, 241, 241, 0.5); /* เพิ่มความเรืองแสงสีฟ้ารอบปุ่ม */
+}
+
+.welcome-banner {
+    background: linear-gradient(135deg, #0b1114, #050b0c); 
+    border-left: 5px solid #0EF1F1; /* เส้นขอบแบนเนอร์สีฟ้าเรืองแสง */
+    color: #ffffff;
+    padding: 32px;
+    border-radius: 16px;
+    margin-bottom: 32px;
+}
+
+.welcome-banner h1 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+.welcome-banner p {
+    font-size: 1rem;
+    color: #7b8e91;
+}
+
+/* Projects Grid */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.section-header h3 {
+    color: #ffffff;
+}
+
+.link-more {
+    color: #0EF1F1;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.link-more:hover {
+    text-decoration: underline;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.pc-project-card {
+    background-color: #0b1114;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #142126;
+    transition: transform 0.2s, border-color 0.2s;
+    cursor: pointer;
+}
+
+.pc-project-card:hover {
+    transform: translateY(-4px);
+    border-color: #0EF1F1; /* เมื่อเอาเมาส์จ่อ ขอบการ์ดจะเปลี่ยนเป็นสีฟ้าเรืองแสง */
+    box-shadow: 0 4px 20px rgba(14, 241, 241, 0.1);
+}
+
+.card-cover {
+    height: 120px;
+}
+/* ไล่เฉดสีหน้าปกให้เป็นโทนฟ้า-เขียวน้ำทะเลดาร์ก */
+.card-cover.fantasy { background: linear-gradient(to bottom, #004d4d, #0b1114); }
+.card-cover.drama { background: linear-gradient(to bottom, #002b3d, #0b1114); }
+
+.card-body {
+    padding: 16px;
+}
+
+.card-body h4 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+    color: #ffffff;
+}
+
+.card-body .desc {
+    font-size: 0.85rem;
+    color: #7b8e91;
+    margin-bottom: 12px;
+}
+
+.card-footer {
+    font-size: 0.75rem;
+    color: #485b61;
+    border-top: 1px solid #142126;
+    padding-top: 8px;
+}
+
+/* --- 3. Right Panel Widgets --- */
+.right-panel {
+    background-color: #0b1114;
+    border-left: 1px solid #142126;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow-y: auto;
+}
+
+.widget h4 {
+    font-size: 1rem;
+    margin-bottom: 16px;
+    color: #ffffff;
+    border-bottom: 2px solid #142126;
+    padding-bottom: 8px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #142126;
+    font-size: 0.9rem;
+    color: #7b8e91;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: #0EF1F1; /* ตัวเลขสถิติเน้นสีฟ้า #0EF1F1 เด่นชัด */
+    text-shadow: 0 0 5px rgba(14, 241, 241, 0.3);
+}
+
+.activity-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 0.85rem;
+}
+
+.activity-list li {
+    line-height: 1.4;
+    color: #7b8e91;
+}
+

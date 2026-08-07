@@ -1,0 +1,169 @@
+
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #050b0c;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.welcome-container::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(14, 241, 241, 0.08);
+    border-radius: 50%;
+    filter: blur(80px);
+    top: 10%;
+    left: 15%;
+    pointer-events: none;
+}
+
+.welcome-container::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(14, 241, 241, 0.05);
+    border-radius: 50%;
+    filter: blur(100px);
+    bottom: 10%;
+    right: 15%;
+    pointer-events: none;
+}
+
+.welcome-content {
+    max-width: 650px;
+    z-index: 2;
+}
+
+.app-brand {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #0EF1F1;
+    text-shadow: 0 0 20px rgba(14, 241, 241, 0.4);
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+}
+
+.app-tagline {
+    font-size: 1.25rem;
+    color: #e0e9eb;
+    margin-bottom: 24px;
+    font-weight: 300;
+}
+
+.app-description {
+    font-size: 0.95rem;
+    color: #7b8e91;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+/* กล่องแสดงฟีเจอร์หลัก (Features Highlight) */
+.features-showcase {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+    text-align: left;
+}
+
+.feature-box {
+    background-color: #0b1114;
+    border: 1px solid #142126;
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.feature-box:hover {
+    transform: translateY(-4px);
+    border-color: #0EF1F1;
+}
+
+.feature-icon {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+.feature-box h3 {
+    color: #ffffff;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.feature-box p {
+    color: #7b8e91;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+/* กลุ่มปุ่มเชื่อมโยง (Action Buttons) */
+.welcome-actions {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.btn-welcome {
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ปุ่มหลัก สมัครสมาชิก (เด่นเรืองแสง) */
+.btn-primary-neon {
+    background-color: #0EF1F1;
+    color: #050b0c;
+    border: none;
+}
+
+.btn-primary-neon:hover {
+    background-color: #00d6d6;
+    box-shadow: 0 0 20px rgba(14, 241, 241, 0.6);
+}
+
+/* ปุ่มรอง เข้าสู่ระบบ */
+.btn-secondary-neon {
+    background-color: transparent;
+    color: #0EF1F1;
+    border: 1px solid #142126;
+}
+
+.btn-secondary-neon:hover {
+    background-color: rgba(14, 241, 241, 0.1);
+    border-color: #0EF1F1;
+}
+
+        /* สไตล์ Responsive สำหรับหน้าจอมือถือ */
+@media (max-width: 600px) {
+    .app-brand {
+        font-size: 2.2rem;
+    }
+    .features-showcase {
+        grid-template-columns: 1fr;
+    }
+    .welcome-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .btn-welcome {
+        width: 100%;
+    }
+}
