@@ -6,6 +6,9 @@ import {
     GoogleAuthProvider, 
     signInWithPopup 
 } from "firebase/auth";
+
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
 import { 
     getFirestore, 
     doc, 
@@ -13,9 +16,6 @@ import {
     setDoc, 
     serverTimestamp 
 } from "firebase/firestore";
-
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
