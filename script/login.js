@@ -1,7 +1,21 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { 
+    getAuth, 
+    createUserWithEmailAndPassword, 
+    updateProfile, 
+    GoogleAuthProvider, 
+    signInWithPopup 
+} from "firebase/auth";
+import { 
+    getFirestore, 
+    doc, 
+    getDoc, 
+    setDoc, 
+    serverTimestamp 
+} from "firebase/firestore";
+
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -18,7 +32,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// ฟังก์ชันอัปเดตเวลาใช้งานล่าสุด / สร้างข้อมูลผู้ใช้กรณีสร้างผ่าน Google
 async function updateLoginTimestamp(user, providerId) {
     const userDocRef = doc(db, "users", user.uid);
     const docSnap = await getDoc(userDocRef);
@@ -41,7 +54,6 @@ async function updateLoginTimestamp(user, providerId) {
     }
 }
 
-// ล็อกอินปกติ (Email / Password)
 const loginForm = document.querySelector("form");
 if (loginForm) {
     loginForm.addEventListener("submit", async (e) => {
@@ -71,24 +83,50 @@ if (loginForm) {
     });
 }
 
-// ล็อกอินด้วย Google
 const googleBtn = document.querySelector(".btn-google");
+
 if (googleBtn) {
-    // ลบ attribute inline onclick บน HTML เพื่อป้องกันการ Redirect ก่อนยืนยันตัวตนสำเร็จ
-    googleBtn.removeAttribute("onclick");
-    
     googleBtn.addEventListener("click", async (e) => {
         e.preventDefault();
+        const auth = getAuth();
+        const db = getFirestore();
         const provider = new GoogleAuthProvider();
+
         try {
+            // 1. แสดง Popup ให้ผู้ใช้เข้าสู่ระบบด้วย Google
             const result = await signInWithPopup(auth, provider);
-            await updateLoginTimestamp(result.user, "google.com");
+            const user = result.user;
+
+            // 2. ตรวจสอบว่ามีข้อมูลผู้ใช้ใน Firestore แล้วหรือยัง
+            const userRef = doc(db, "users", user.uid);
+            const userSnap = await getDoc(userRef);
+
+            if (!userSnap.exists()) {
+                // หากยังไม่มี (สมัครใหม่) ให้บันทึกข้อมูลใหม่
+                await setDoc(userRef, {
+                    uid: user.uid,
+                    displayName: user.displayName || "User",
+                    email: user.email,
+                    photoURL: user.photoURL || "",
+                    providerId: "google.com",
+                    role: "user",
+                    createdAt: serverTimestamp(),
+                    lastLoginAt: serverTimestamp()
+                });
+            } else {
+                // หากมีแล้ว (เข้าสู่ระบบ) ให้ อัปเดตเวลาเข้าใช้งานล่าสุด
+                await setDoc(userRef, {
+                    lastLoginAt: serverTimestamp()
+                }, { merge: true });
+            }
+
             alert("เข้าสู่ระบบด้วย Google สำเร็จ!");
             window.location.href = "homepage.html";
+
         } catch (error) {
             console.error("Google Auth Error:", error);
             if (error.code !== "auth/popup-closed-by-user") {
-                alert("เกิดข้อผิดพลาดในการล็อกอินด้วย Google");
+                alert("เกิดข้อผิดพลาดในการเชื่อมต่อ Google");
             }
         }
     });

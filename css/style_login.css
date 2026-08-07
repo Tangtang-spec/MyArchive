@@ -180,7 +180,9 @@
         box-shadow: 0 0 10px rgba(14, 241, 241, 0.15); 
 }
 
-.btn-google img { 
-        width: 18px; 
-        height: 18px; 
+/* ตั้งค่าขนาดโลโก้ Google */
+.btn-google img {
+    width: 20px;
+    height: 20px;
+    display: block;
 }

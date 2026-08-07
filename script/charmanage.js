@@ -1,8 +1,19 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, doc, deleteDoc, updateDoc, query, where, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-const firebaseConfig = { /* เดียวกันกับล็อกอิน */ };
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDq5_JfoO8iVa-ZoobyetWchPSHeTwGKCQ",
+  authDomain: "fictionarchive.firebaseapp.com",
+  projectId: "fictionarchive",
+  storageBucket: "fictionarchive.firebasestorage.app",
+  messagingSenderId: "629845800031",
+  appId: "1:629845800031:web:bea825a00e55dcfd4ad7ea"
+};
+
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
