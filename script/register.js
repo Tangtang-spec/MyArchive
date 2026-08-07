@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { 
     getAuth, 
-    signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword, 
+    updateProfile, 
     GoogleAuthProvider, 
     signInWithPopup 
 } from "firebase/auth";
@@ -12,9 +13,6 @@ import {
     setDoc, 
     serverTimestamp 
 } from "firebase/firestore";
-
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -99,13 +97,11 @@ if (registerForm) {
     });
 }
 
-const googleBtn = document.querySelector(".btn-google");
+const googleBtn = document.getElementById("googleRegisterBtn");
 
 if (googleBtn) {
     googleBtn.addEventListener("click", async (e) => {
         e.preventDefault();
-        const auth = getAuth();
-        const db = getFirestore();
         const provider = new GoogleAuthProvider();
 
         try {

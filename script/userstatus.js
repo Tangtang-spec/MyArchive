@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { 
     getAuth, 
+    signOut,
     createUserWithEmailAndPassword, 
     updateProfile, 
     GoogleAuthProvider, 
@@ -30,17 +31,20 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 // จับเหตุการณ์เมื่อกดปุ่ม "ออกจากระบบ"
-document.getElementById("btn-logout").addEventListener("click", async (e) => {
-e.preventDefault(); // ป้องกันไม่ให้ลิงก์เคลียร์หน้าเว็บเปล่า ๆ
-            
-if (confirm("คุณต้องการออกจากระบบใช่หรือไม่?")) {
-    try {
-        await signOut(auth);
-        alert("ออกจากระบบสำเร็จแล้ว!");
-        window.location.href = "login.html"; // เตะกลับไปหน้าล็อกอินหลัก
-        } catch (error) {
-            console.error("เกิดข้อผิดพลาดในการ Log out:", error.message);
-            alert("ไม่สามารถออกจากระบบได้ กรุณาลองอีกครั้ง");
+const logoutBtn = document.getElementById("btn-logout");
+if (logoutBtn) {
+    logoutBtn.addEventListener("click", async (e) => {
+        e.preventDefault(); // ป้องกันไม่ให้ลิงก์เคลียร์หน้าเว็บเปล่า ๆ
+                    
+        if (confirm("คุณต้องการออกจากระบบใช่หรือไม่?")) {
+            try {
+                await signOut(auth);
+                alert("ออกจากระบบสำเร็จแล้ว!");
+                window.location.href = "login.html"; // เตะกลับไปหน้าล็อกอินหลัก
+            } catch (error) {
+                console.error("เกิดข้อผิดพลาดในการ Log out:", error.message);
+                alert("ไม่สามารถออกจากระบบได้ กรุณาลองอีกครั้ง");
+            }
         }
-    }
-});
+    });
+}

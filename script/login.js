@@ -79,13 +79,11 @@ if (loginForm) {
     });
 }
 
-const googleBtn = document.querySelector(".btn-google");
+const googleBtn = document.getElementById("googleLoginBtn");
 
 if (googleBtn) {
     googleBtn.addEventListener("click", async (e) => {
         e.preventDefault();
-        const auth = getAuth();
-        const db = getFirestore();
         const provider = new GoogleAuthProvider();
 
         try {
