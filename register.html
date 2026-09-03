@@ -3,68 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiction Archive - Register</title>
+    <title>สมัครสมาชิก</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/style_login.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_login.css">
 </head>
-
 <body>
-    <!-- เรียกใช้ไฟล์สคริปต์แยก (ต้องระบุ type="module") -->
-    <script type="module" src="script/register.js"></script>
-
     <div class="auth-container">
         <div class="auth-card">
-            
             <div class="auth-header">
-                <h2>สร้างบัญชีใหม่</h2>
-                <p>เริ่มต้นก้าวแรกของการสร้างสรรค์คลังข้อมูลนิยาย</p>
+                <h2>สมัครสมาชิก</h2>
+                <p>สร้างบัญชีใหม่เพื่อเริ่มต้นใช้งาน</p>
             </div>
 
-            <form action="#">
+            <form id="register-form">
                 <div class="form-group">
-                    <label for="username">ชื่อผู้ใช้งาน หรือ นามปากกา</label>
-                    <input type="text" id="username" placeholder="กรอกชื่อผู้ใช้ของคุณ" required>
+                    <label for="reg-name">ชื่อผู้ใช้งาน</label>
+                    <input type="text" id="reg-name" placeholder="John Doe" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="email">อีเมล</label>
-                    <input type="email" id="email" placeholder="example@email.com" required>
+                    <label for="reg-email">อีเมล</label>
+                    <input type="email" id="reg-email" placeholder="name@example.com" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="password">รหัสผ่าน</label>
-                    <input type="password" id="password" placeholder="กำหนดรหัสผ่านอย่างน้อย 6 ตัวอักษร" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="confirm-password">ยืนยันรหัสผ่านอีกครั้ง</label>
-                    <input type="password" id="confirm-password" placeholder="••••••••" required>
+                    <label for="reg-password">รหัสผ่าน</label>
+                    <input type="password" id="reg-password" placeholder="••••••••" required>
                 </div>
 
                 <label class="terms-condition">
-                    <input type="checkbox" required> ฉันได้อ่านและยอมรับข้อตกลงการใช้งาน และนโยบายความเป็นส่วนตัวของ Fiction Archive เรียบร้อยแล้ว
+                    <input type="checkbox" id="terms" required>
+                    ฉันยอมรับข้อตกลงและเงื่อนไขการใช้งาน
                 </label>
 
-                <button type="submit" class="btn-auth">สมัครสมาชิก</button>
+                <button type="submit" class="btn-auth">ลงทะเบียน</button>
             </form>
 
-            <div class="auth-divider">หรือทำรายการต่อด้วย</div>
-            
-            <!-- ปุ่มสมัครสมาชิกด้วย Google -->
-            <button type="button" id="googleRegisterBtn" class="btn-google">
-                <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/web-24dp/logo_googleg_color_24dp.png" alt="Google Logo">
-                <span>สมัครสมาชิกด้วย Google</span>
+            <div class="auth-divider">หรือ</div>
+
+            <button type="button" id="btn-google-register" class="btn-google">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
+                สมัครด้วย Google
             </button>
 
             <div class="auth-footer">
-                มีบัญชีผู้ใช้อยู่แล้วใช่ไหม? <a href="login.html">เข้าสู่ระบบได้ที่นี่</a>
+                มีบัญชีอยู่แล้ว? <a href="login.html">เข้าสู่ระบบ</a>
             </div>
-
         </div>
     </div>
 
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
 </body>
 </html>

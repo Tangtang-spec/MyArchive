@@ -3,61 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiction Archive - Log In</title>
+    <title>เข้าสู่ระบบ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style_login.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <!-- เรียกใช้ไฟล์สคริปต์แยก (ต้องระบุ type="module") -->
-    <script type="module" src="script/login.js"></script>
-
     <div class="auth-container">
         <div class="auth-card">
-            
             <div class="auth-header">
-                <h2>Fiction Archive</h2>
-                <p>ยินดีต้อนรับกลับมานักสร้างสรรค์โลก</p>
+                <h2>เข้าสู่ระบบ</h2>
+                <p>ยินดีต้อนรับกลับเข้าสู่ระบบ</p>
             </div>
 
-            <form action="#">
+            <form id="login-form">
                 <div class="form-group">
-                    <label for="email">อีเมลผู้ใช้งาน</label>
-                    <input type="email" id="email" placeholder="example@email.com" required>
+                    <label for="login-email">อีเมล</label>
+                    <input type="email" id="login-email" placeholder="name@example.com" required>
                 </div>
-
                 <div class="form-group">
-                    <label for="password">รหัสผ่าน</label>
-                    <input type="password" id="password" placeholder="••••••••" required>
+                    <label for="login-password">รหัสผ่าน</label>
+                    <input type="password" id="login-password" placeholder="••••••••" required>
                 </div>
 
                 <div class="auth-options">
                     <label class="remember-me">
-                        <input type="checkbox"> จดจำฉันในระบบ
+                        <input type="checkbox" id="remember-me"> จำการเข้าสู่ระบบ
                     </label>
-                    <a href="#" class="forgot-pass">ลืมรืมรหัสผ่าน?</a>
+                    <a href="#" id="forgot-password" class="forgot-pass">ลืมรหัสผ่าน?</a>
                 </div>
 
                 <button type="submit" class="btn-auth">เข้าสู่ระบบ</button>
             </form>
 
-            <div class="auth-divider">หรือทำรายการต่อด้วย</div>
-            
-            <!-- ปุ่มเข้าสู่ระบบด้วย Google -->
-            <button type="button" id="googleLoginBtn" class="btn-google">
-                <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/web-24dp/logo_googleg_color_24dp.png" alt="Google Logo">
-                <span>เข้าสู่ระบบด้วย Google</span>
+            <div class="auth-divider">หรือ</div>
+
+            <button type="button" id="btn-google-login" class="btn-google">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
+                เข้าสู่ระบบด้วย Google
             </button>
 
             <div class="auth-footer">
-                ยังไม่มีบัญชีใช่ไหม? <a href="register.html">สมัครสมาชิกที่นี่</a>
+                ยังไม่มีบัญชี? <a href="register.html">สมัครสมาชิก</a>
             </div>
-
         </div>
     </div>
 
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="auth.js"></script>
 </body>
 </html>
