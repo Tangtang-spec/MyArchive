@@ -18,10 +18,6 @@ const db = getFirestore();
 
 /**
  * ฟังก์ชันสำหรับเปิดแสดง Popup แจ้งเตือน
- * @param {string} type - 'success' หรือ 'error'
- * @param {string} title - หัวข้อ
- * @param {string} message - ข้อความรายละเอียด
- * @param {Function} [onConfirm] - ฟังก์ชันทำงานต่อเมื่อกดปุ่มตกลง
  */
 function showModal({ type = "success", title, message, onConfirm }) {
     const modal = document.getElementById("auth-modal");
@@ -90,7 +86,10 @@ if (registerForm) {
                 type: "success",
                 title: "สมัครสมาชิกสำเร็จ",
                 message: "สร้างบัญชีผู้ใช้เรียบร้อยแล้ว ยินดีต้อนรับ!",
-                onConfirm: () => { window.location.href = "index.html"; }
+                onConfirm: () => { 
+                    // เปลี่ยนเป้าหมายไปยัง homepage.html
+                    window.location.href = "homepage.html"; 
+                }
             });
 
         } catch (error) {
@@ -118,7 +117,10 @@ if (loginForm) {
                 type: "success",
                 title: "เข้าสู่ระบบสำเร็จ",
                 message: "กำลังนำคุณไปยังหน้าหลัก...",
-                onConfirm: () => { window.location.href = "index.html"; }
+                onConfirm: () => { 
+                    // เปลี่ยนเป้าหมายไปยัง homepage.html
+                    window.location.href = "homepage.html"; 
+                }
             });
 
         } catch (error) {
@@ -159,7 +161,10 @@ const handleGoogleAuth = async () => {
             type: "success",
             title: "ยืนยันตัวตนสำเร็จ",
             message: `เข้าสู่ระบบในชื่อ ${user.displayName || user.email}`,
-            onConfirm: () => { window.location.href = "index.html"; }
+            onConfirm: () => { 
+                // เปลี่ยนเป้าหมายไปยัง homepage.html
+                window.location.href = "homepage.html"; 
+            }
         });
 
     } catch (error) {
@@ -172,6 +177,86 @@ const handleGoogleAuth = async () => {
         }
     }
 };
+
+/**
+ * ฟังก์ชันเรียกเปิด Popup เข้าสู่ระบบ / สมัครสมาชิกด้วย Google
+ */
+async function handleGoogleAuth() {
+    try {
+        // คำสั่ง signInWithPopup จะเปิดหน้าต่าง Popup เลือกบัญชี Google ขึ้นมา
+        const result = await signInWithPopup(auth, googleProvider);
+        const user = result.user;
+        const userInfo = getAdditionalUserInfo(result);
+
+        const userRef = doc(db, "users", user.uid);
+
+        // ตรวจสอบว่าเป็นผู้ใช้ใหม่ที่เพิ่งกดสมัครหรือไม่
+        if (userInfo?.isNewUser) {
+            // บันทึกข้อมูลผู้ใช้ใหม่ลง Firestore
+            await setDoc(userRef, {
+                uid: user.uid,
+                displayName: user.displayName || "Google User",
+                email: user.email,
+                photoURL: user.photoURL || "",
+                provider: "google.com",
+                role: "user",
+                createdAt: serverTimestamp(),
+                updatedAt: serverTimestamp()
+            });
+
+            showModal({
+                type: "success",
+                title: "สมัครสมาชิกด้วย Google สำเร็จ",
+                message: `ยินดีต้อนรับคุณ ${user.displayName || user.email}`,
+                onConfirm: () => { window.location.href = "homepage.html"; }
+            });
+        } else {
+            // กรณีเป็นผู้ใช้เดิม เข้าสู่ระบบ
+            await setDoc(userRef, { updatedAt: serverTimestamp() }, { merge: true });
+
+            showModal({
+                type: "success",
+                title: "เข้าสู่ระบบด้วย Google สำเร็จ",
+                message: `ยินดีต้อนรับกลับ ${user.displayName || user.email}`,
+                onConfirm: () => { window.location.href = "homepage.html"; }
+            });
+        }
+
+    } catch (error) {
+        console.error("Google Auth Error:", error);
+
+        // ดักจับ Error กรณีผู้ใช้ปิด Popup หรือเบราว์เซอร์บล็อก Popup
+        if (error.code === "auth/popup-closed-by-user") {
+            // ปิด Popup เอง ไม่ต้องขึ้น alert รบกวนผู้ใช้
+            console.log("ผู้ใช้กดปิดหน้าต่าง Google Popup");
+        } else if (error.code === "auth/popup-blocked") {
+            showModal({
+                type: "error",
+                title: "เกิดข้อผิดพลาด",
+                message: "เบราว์เซอร์ของคุณบล็อก Popup กรุณาอนุญาตให้เปิด Popup สำหรับเว็บไซต์นี้"
+            });
+        } else {
+            showModal({
+                type: "error",
+                title: "เกิดข้อผิดพลาด",
+                message: error.message
+            });
+        }
+    }
+}
+
+// ผูก Event Listener เข้ากับปุ่ม Google ในหน้าสมัครและหน้าเข้าสู่ระบบ
+document.addEventListener("DOMContentLoaded", () => {
+    const googleLoginBtn = document.getElementById("btn-google-login");
+    const googleRegBtn = document.getElementById("btn-google-register");
+
+    if (googleLoginBtn) {
+        googleLoginBtn.addEventListener("click", handleGoogleAuth);
+    }
+    if (googleRegBtn) {
+        googleRegBtn.addEventListener("click", handleGoogleAuth);
+    }
+});
 
 const googleLoginBtn = document.getElementById("btn-google-login");
 const googleRegBtn = document.getElementById("btn-google-register");
