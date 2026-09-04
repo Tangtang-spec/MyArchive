@@ -1,26 +1,27 @@
-import { auth, googleProvider } from "./firebase-config.js";
+import { auth, db, googleProvider } from "./firebase-config.js";
 import { 
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword, 
     signInWithPopup, 
     updateProfile,
-    getAdditionalUserInfo
+    getAdditionalUserInfo,
+    sendPasswordResetEmail,
+    setPersistence,
+    browserLocalPersistence,
+    browserSessionPersistence
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 import { 
-    getFirestore, 
     doc, 
     setDoc, 
     serverTimestamp 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-const db = getFirestore();
-
-/**
- * ฟังก์ชันสำหรับเปิดแสดง Popup แจ้งเตือน
- */
+// --- ฟังก์ชันเปิด Modal แจ้งเตือน ---
 function showModal({ type = "success", title, message, onConfirm }) {
     const modal = document.getElementById("auth-modal");
+    if (!modal) return;
+
     const modalCard = modal.querySelector(".modal-card");
     const iconEl = document.getElementById("modal-icon");
     const titleEl = document.getElementById("modal-title");
@@ -41,7 +42,7 @@ function showModal({ type = "success", title, message, onConfirm }) {
     };
 }
 
-// แปลง Error Code จาก Firebase ให้เป็นข้อความภาษาไทย
+// แปลง Error Code จาก Firebase เป็นภาษาไทย
 function getErrorMessage(code) {
     switch (code) {
         case "auth/invalid-credential":
@@ -50,8 +51,8 @@ function getErrorMessage(code) {
             return "อีเมลนี้ถูกใช้งานในระบบแล้ว";
         case "auth/weak-password":
             return "รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัวอักษร";
-        case "auth/popup-closed-by-user":
-            return "คุณได้ยกเลิกการเข้าสู่ระบบผ่าน Google";
+        case "auth/popup-blocked":
+            return "เบราว์เซอร์ของคุณบล็อก Popup กรุณาอนุญาตการเปิด Popup";
         default:
             return "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง";
     }
@@ -86,10 +87,7 @@ if (registerForm) {
                 type: "success",
                 title: "สมัครสมาชิกสำเร็จ",
                 message: "สร้างบัญชีผู้ใช้เรียบร้อยแล้ว ยินดีต้อนรับ!",
-                onConfirm: () => { 
-                    // เปลี่ยนเป้าหมายไปยัง homepage.html
-                    window.location.href = "homepage.html"; 
-                }
+                onConfirm: () => { window.location.href = "homepage.html"; }
             });
 
         } catch (error) {
@@ -109,18 +107,19 @@ if (loginForm) {
         e.preventDefault();
         const email = document.getElementById("login-email").value;
         const password = document.getElementById("login-password").value;
+        const rememberMe = document.getElementById("remember-me")?.checked;
 
         try {
+            const persistence = rememberMe ? browserLocalPersistence : browserSessionPersistence;
+            await setPersistence(auth, persistence);
+            
             await signInWithEmailAndPassword(auth, email, password);
             
             showModal({
                 type: "success",
                 title: "เข้าสู่ระบบสำเร็จ",
                 message: "กำลังนำคุณไปยังหน้าหลัก...",
-                onConfirm: () => { 
-                    // เปลี่ยนเป้าหมายไปยัง homepage.html
-                    window.location.href = "homepage.html"; 
-                }
+                onConfirm: () => { window.location.href = "homepage.html"; }
             });
 
         } catch (error) {
@@ -133,13 +132,12 @@ if (loginForm) {
     });
 }
 
-// --- 3. เข้าสู่ระบบ / สมัครด้วย Google ---
+// --- 3. เข้าสู่ระบบ / สมัครสมาชิกด้วย Google (Popup) ---
 const handleGoogleAuth = async () => {
     try {
         const result = await signInWithPopup(auth, googleProvider);
         const user = result.user;
         const userInfo = getAdditionalUserInfo(result);
-
         const userRef = doc(db, "users", user.uid);
 
         if (userInfo?.isNewUser) {
@@ -161,10 +159,7 @@ const handleGoogleAuth = async () => {
             type: "success",
             title: "ยืนยันตัวตนสำเร็จ",
             message: `เข้าสู่ระบบในชื่อ ${user.displayName || user.email}`,
-            onConfirm: () => { 
-                // เปลี่ยนเป้าหมายไปยัง homepage.html
-                window.location.href = "homepage.html"; 
-            }
+            onConfirm: () => { window.location.href = "homepage.html"; }
         });
 
     } catch (error) {
@@ -178,87 +173,32 @@ const handleGoogleAuth = async () => {
     }
 };
 
-/**
- * ฟังก์ชันเรียกเปิด Popup เข้าสู่ระบบ / สมัครสมาชิกด้วย Google
- */
-async function handleGoogleAuth() {
-    try {
-        // คำสั่ง signInWithPopup จะเปิดหน้าต่าง Popup เลือกบัญชี Google ขึ้นมา
-        const result = await signInWithPopup(auth, googleProvider);
-        const user = result.user;
-        const userInfo = getAdditionalUserInfo(result);
-
-        const userRef = doc(db, "users", user.uid);
-
-        // ตรวจสอบว่าเป็นผู้ใช้ใหม่ที่เพิ่งกดสมัครหรือไม่
-        if (userInfo?.isNewUser) {
-            // บันทึกข้อมูลผู้ใช้ใหม่ลง Firestore
-            await setDoc(userRef, {
-                uid: user.uid,
-                displayName: user.displayName || "Google User",
-                email: user.email,
-                photoURL: user.photoURL || "",
-                provider: "google.com",
-                role: "user",
-                createdAt: serverTimestamp(),
-                updatedAt: serverTimestamp()
-            });
-
-            showModal({
-                type: "success",
-                title: "สมัครสมาชิกด้วย Google สำเร็จ",
-                message: `ยินดีต้อนรับคุณ ${user.displayName || user.email}`,
-                onConfirm: () => { window.location.href = "homepage.html"; }
-            });
-        } else {
-            // กรณีเป็นผู้ใช้เดิม เข้าสู่ระบบ
-            await setDoc(userRef, { updatedAt: serverTimestamp() }, { merge: true });
-
-            showModal({
-                type: "success",
-                title: "เข้าสู่ระบบด้วย Google สำเร็จ",
-                message: `ยินดีต้อนรับกลับ ${user.displayName || user.email}`,
-                onConfirm: () => { window.location.href = "homepage.html"; }
-            });
-        }
-
-    } catch (error) {
-        console.error("Google Auth Error:", error);
-
-        // ดักจับ Error กรณีผู้ใช้ปิด Popup หรือเบราว์เซอร์บล็อก Popup
-        if (error.code === "auth/popup-closed-by-user") {
-            // ปิด Popup เอง ไม่ต้องขึ้น alert รบกวนผู้ใช้
-            console.log("ผู้ใช้กดปิดหน้าต่าง Google Popup");
-        } else if (error.code === "auth/popup-blocked") {
-            showModal({
-                type: "error",
-                title: "เกิดข้อผิดพลาด",
-                message: "เบราว์เซอร์ของคุณบล็อก Popup กรุณาอนุญาตให้เปิด Popup สำหรับเว็บไซต์นี้"
-            });
-        } else {
-            showModal({
-                type: "error",
-                title: "เกิดข้อผิดพลาด",
-                message: error.message
-            });
-        }
-    }
-}
-
-// ผูก Event Listener เข้ากับปุ่ม Google ในหน้าสมัครและหน้าเข้าสู่ระบบ
-document.addEventListener("DOMContentLoaded", () => {
-    const googleLoginBtn = document.getElementById("btn-google-login");
-    const googleRegBtn = document.getElementById("btn-google-register");
-
-    if (googleLoginBtn) {
-        googleLoginBtn.addEventListener("click", handleGoogleAuth);
-    }
-    if (googleRegBtn) {
-        googleRegBtn.addEventListener("click", handleGoogleAuth);
-    }
-});
-
 const googleLoginBtn = document.getElementById("btn-google-login");
 const googleRegBtn = document.getElementById("btn-google-register");
 if (googleLoginBtn) googleLoginBtn.addEventListener("click", handleGoogleAuth);
 if (googleRegBtn) googleRegBtn.addEventListener("click", handleGoogleAuth);
+
+// --- 4. ลืมรหัสผ่าน ---
+const forgotPassLink = document.getElementById("forgot-password");
+if (forgotPassLink) {
+    forgotPassLink.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const email = prompt("กรุณากรอกอีเมลของคุณเพื่อรับลิงก์รีเซ็ตรหัสผ่าน:");
+        if (email) {
+            try {
+                await sendPasswordResetEmail(auth, email);
+                showModal({
+                    type: "success",
+                    title: "ส่งอีเมลสำเร็จ",
+                    message: "ระบบได้ส่งลิงก์รีเซ็ตรหัสผ่านไปยังอีเมลของคุณเรียบร้อยแล้ว"
+                });
+            } catch (error) {
+                showModal({
+                    type: "error",
+                    title: "เกิดข้อผิดพลาด",
+                    message: getErrorMessage(error.code)
+                });
+            }
+        }
+    });
+}

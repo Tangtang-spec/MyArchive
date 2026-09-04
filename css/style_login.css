@@ -203,7 +203,7 @@
     display: block;
 }
 
-/* --- Popup Modal Overlay & Card --- */
+/* Modal Popup Styles */
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -255,7 +255,6 @@
     margin: 0 auto 16px auto;
 }
 
-/* กรณีทำรายการสำเร็จ (Success) */
 .modal-card.success {
     border-color: #0EF1F1;
 }
@@ -269,7 +268,6 @@
     color: #0EF1F1;
 }
 
-/* กรณีเกิดข้อผิดพลาด (Error) */
 .modal-card.error {
     border-color: #ff4d4d;
 }
