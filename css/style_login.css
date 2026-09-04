@@ -202,3 +202,95 @@
     height: 20px;
     display: block;
 }
+
+/* --- Popup Modal Overlay & Card --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(5, 11, 12, 0.85);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-card {
+    background-color: #0b1114;
+    border: 1px solid #142126;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 360px;
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-card {
+    transform: scale(1);
+}
+
+.modal-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0 auto 16px auto;
+}
+
+/* กรณีทำรายการสำเร็จ (Success) */
+.modal-card.success {
+    border-color: #0EF1F1;
+}
+.modal-card.success .modal-icon {
+    background-color: rgba(14, 241, 241, 0.15);
+    color: #0EF1F1;
+    border: 2px solid #0EF1F1;
+    box-shadow: 0 0 15px rgba(14, 241, 241, 0.3);
+}
+.modal-card.success h3 {
+    color: #0EF1F1;
+}
+
+/* กรณีเกิดข้อผิดพลาด (Error) */
+.modal-card.error {
+    border-color: #ff4d4d;
+}
+.modal-card.error .modal-icon {
+    background-color: rgba(255, 77, 77, 0.15);
+    color: #ff4d4d;
+    border: 2px solid #ff4d4d;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
+}
+.modal-card.error h3 {
+    color: #ff4d4d;
+}
+
+.modal-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.modal-card p {
+    color: #7b8e91;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    line-height: 1.4;
+}
