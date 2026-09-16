@@ -1,4 +1,4 @@
-import { auth, db } from "../firebase-config.js";
+import { auth, db } from "./firebase-config.js";
 import { 
     onAuthStateChanged, 
     signOut 
@@ -129,7 +129,7 @@ function updateDashboardStats(projectCount, charCount, worldCount) {
     statTotalWorldbuilding.textContent = `${worldCount} รายการ`;
 }
 
-// --- 3. การใช้งาน Modal สร้าง Project ใหม่ ---
+// --- การใช้งาน Modal สร้าง Project ใหม่ ---
 const openModal = () => projectModal.classList.add("active");
 const closeModal = () => {
     projectModal.classList.remove("active");
@@ -140,7 +140,21 @@ btnOpenModal.addEventListener("click", openModal);
 btnCloseModal.addEventListener("click", closeModal);
 btnCancelModal.addEventListener("click", closeModal);
 
-// บันทึกโปรเจกต์ใหม่ลง Firestore
+// ปิด Modal เมื่อคลิกที่พื้นหลังนอกกล่อง (Overlay)
+projectModal.addEventListener("click", (e) => {
+    if (e.target === projectModal) {
+        closeModal();
+    }
+});
+
+// ปิด Modal เมื่อกดปุ่ม Esc
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && projectModal.classList.contains("active")) {
+        closeModal();
+    }
+});
+
+// บันทึกโปรเจกต์ใหม่ลง Firestore (ใน homepage.js)
 createProjectForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!currentUser) return;
@@ -159,6 +173,8 @@ createProjectForm.addEventListener("submit", async (e) => {
             description,
             characterCount: 0,
             worldbuildingCount: 0,
+            powerCount: 0,       // เพิ่มเพื่อให้โครงสร้างตรงกัน
+            chapterCount: 0,     // เพิ่มเพื่อให้โครงสร้างตรงกัน
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp()
         });
@@ -168,7 +184,6 @@ createProjectForm.addEventListener("submit", async (e) => {
         alert("เกิดข้อผิดพลาดในการสร้างโปรเจกต์: " + error.message);
     }
 });
-
 // --- 4. ออกจากระบบ (Logout) ---
 if (btnLogout) {
     btnLogout.addEventListener("click", (e) => {

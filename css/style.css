@@ -7,8 +7,8 @@
 
 body {
     font-family: 'Sarabun', sans-serif;
-    background-color: #050b0c; /* สีดำโทนน้ำเงิน-เขียวเข้มลึกมาก เพื่อให้เข้ากับสีเรืองแสง */
-    color: #b2c4c7; /* สีตัวอักษรเทาอมฟ้าอ่อน สบายตา */
+    background-color: #050b0c; /* ดำโทนน้ำเงิน-เขียวเข้มลึก */
+    color: #b2c4c7; /* เทาอมฟ้าอ่อน สบายตา */
     overflow-x: hidden;
 }
 
@@ -21,20 +21,20 @@ body {
 
 /* --- 1. Sidebar Navigation --- */
 .sidebar {
-    background-color: #0b1114; /* สีเทาเข้มโทนเย็น */
+    background-color: #0b1114;
     color: #e0e9eb;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 24px;
-    border-right: 1px solid #142126; /* เส้นขอบโทนเขียว-น้ำเงินเข้ม */
+    border-right: 1px solid #142126;
 }
 
 .sidebar-brand h2 {
     font-size: 1.4rem;
     font-weight: 600;
-    color: #0EF1F1; /* สีฟ้าเรืองแสงหลักของแบรนด์ */
-    text-shadow: 0 0 12px rgba(14, 241, 241, 0.5); /* เอฟเฟกต์เรืองแสงนีออน */
+    color: #0EF1F1;
+    text-shadow: 0 0 12px rgba(14, 241, 241, 0.5);
 }
 
 .sidebar-menu {
@@ -50,7 +50,7 @@ body {
     align-items: center;
     gap: 12px;
     padding: 12px 16px;
-    color: #657e85; /* สีเมนูปกติเทาหม่น */
+    color: #657e85;
     text-decoration: none;
     border-radius: 8px;
     transition: all 0.2s;
@@ -58,13 +58,13 @@ body {
 
 .menu-item:hover {
     background-color: #111e24;
-    color: #0EF1F1; /* เปลี่ยนเป็นสีฟ้าเรืองแสงเมื่อ Hover */
+    color: #0EF1F1;
 }
 
 .menu-item.active {
-    background-color: rgba(14, 241, 241, 0.15); /* พื้นหลังเมนูแบบโปร่งแสงสีฟ้า */
+    background-color: rgba(14, 241, 241, 0.15);
     color: #0EF1F1;
-    border-left: 4px solid #0EF1F1; /* เส้นขอบซ้ายเน้นเมนูที่ใช้งาน */
+    border-left: 4px solid #0EF1F1;
     font-weight: 600;
 }
 
@@ -77,13 +77,14 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
+    position: relative;
 }
 
 .avatar {
     width: 40px;
     height: 40px;
-    background-color: #0EF1F1; /* อวตารผู้ใช้สีฟ้าเรืองแสง */
-    color: #050b0c; /* ตัวอักษรสีเข้มเพื่อตัดกัน */
+    background-color: #0EF1F1;
+    color: #050b0c;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -131,13 +132,13 @@ body {
 }
 
 .search-bar input:focus {
-    border-color: #0EF1F1; /* ขอบเปลี่ยนเป็นสีฟ้าเรืองแสงเมื่อโฟกัส */
+    border-color: #0EF1F1;
     box-shadow: 0 0 8px rgba(14, 241, 241, 0.2);
 }
 
 .btn-create {
-    background-color: #0EF1F1; /* ปุ่มสร้างหลักสีฟ้าเรืองแสง */
-    color: #050b0c; /* อักษรด้านในสีเข้มเพื่อให้มองเห็นชัดเจน */
+    background-color: #0EF1F1;
+    color: #050b0c;
     border: none;
     padding: 10px 20px;
     border-radius: 8px;
@@ -147,13 +148,13 @@ body {
 }
 
 .btn-create:hover {
-    background-color: #00d6d6; /* ดรอปความสว่างลงเล็กน้อยตอน Hover */
-    box-shadow: 0 0 15px rgba(14, 241, 241, 0.5); /* เพิ่มความเรืองแสงสีฟ้ารอบปุ่ม */
+    background-color: #00d6d6;
+    box-shadow: 0 0 15px rgba(14, 241, 241, 0.5);
 }
 
 .welcome-banner {
     background: linear-gradient(135deg, #0b1114, #050b0c); 
-    border-left: 5px solid #0EF1F1; /* เส้นขอบแบนเนอร์สีฟ้าเรืองแสง */
+    border-left: 5px solid #0EF1F1;
     color: #ffffff;
     padding: 32px;
     border-radius: 16px;
@@ -210,14 +211,13 @@ body {
 
 .pc-project-card:hover {
     transform: translateY(-4px);
-    border-color: #0EF1F1; /* เมื่อเอาเมาส์จ่อ ขอบการ์ดจะเปลี่ยนเป็นสีฟ้าเรืองแสง */
+    border-color: #0EF1F1;
     box-shadow: 0 4px 20px rgba(14, 241, 241, 0.1);
 }
 
 .card-cover {
     height: 120px;
 }
-/* ไล่เฉดสีหน้าปกให้เป็นโทนฟ้า-เขียวน้ำทะเลดาร์ก */
 .card-cover.fantasy { background: linear-gradient(to bottom, #004d4d, #0b1114); }
 .card-cover.drama { background: linear-gradient(to bottom, #002b3d, #0b1114); }
 
@@ -274,7 +274,7 @@ body {
 
 .stat-value {
     font-weight: 600;
-    color: #0EF1F1; /* ตัวเลขสถิติเน้นสีฟ้า #0EF1F1 เด่นชัด */
+    color: #0EF1F1;
     text-shadow: 0 0 5px rgba(14, 241, 241, 0.3);
 }
 
@@ -291,10 +291,44 @@ body {
     color: #7b8e91;
 }
 
-/* --- Modal Form Styling --- */
+/* --- 4. Modal Overlay & Project Form --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(5, 11, 12, 0.85);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 .project-modal-card {
+    background-color: #0b1114;
+    border: 1px solid #142126;
+    border-radius: 16px;
+    width: 90%;
     max-width: 480px;
+    padding: 32px 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
     text-align: left;
+}
+
+.modal-overlay.active .project-modal-card {
+    transform: scale(1);
 }
 
 .modal-header {
@@ -322,21 +356,20 @@ body {
     color: #0EF1F1;
 }
 
-.select-input {
-    width: 100%;
-    padding: 12px 16px;
-    background-color: #050b0c;
-    border: 1px solid #142126;
-    border-radius: 8px;
-    color: #ffffff;
-    outline: none;
-    font-size: 0.95rem;
+.form-group {
+    margin-bottom: 16px;
 }
 
-.select-input:focus {
-    border-color: #0EF1F1;
+.form-group label {
+    display: block;
+    color: #e0e9eb;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    font-weight: 600;
 }
 
+.form-group input,
+.select-input,
 textarea {
     width: 100%;
     padding: 12px 16px;
@@ -346,9 +379,16 @@ textarea {
     color: #ffffff;
     outline: none;
     font-size: 0.95rem;
-    resize: vertical;
+    transition: border 0.2s, box-shadow 0.2s;
 }
 
+textarea {
+    resize: vertical;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.select-input:focus,
 textarea:focus {
     border-color: #0EF1F1;
     box-shadow: 0 0 8px rgba(14, 241, 241, 0.2);
@@ -369,11 +409,30 @@ textarea:focus {
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
+    transition: background 0.2s, color 0.2s;
 }
 
 .btn-cancel:hover {
     background-color: #111e24;
     color: #ffffff;
+}
+
+/* ปุ่มกดใน Modal (ส่งฟอร์ม) */
+.btn-auth {
+    background-color: #0EF1F1;
+    color: #050b0c;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn-auth:hover {
+    background-color: #00d6d6;
+    box-shadow: 0 0 15px rgba(14, 241, 241, 0.4);
 }
 
 .loading-state, .empty-state {
