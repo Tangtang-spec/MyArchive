@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fiction Archive - Worldbuilding Manager</title>
+    
+    <!-- CSS Dependencies -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/style_char.css">
-    <link rel="stylesheet" href="css/style_project.css">
     <link rel="stylesheet" href="css/styleworldbuild.css">
     <link rel="stylesheet" href="css/profilestyle.css">
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
@@ -24,10 +27,10 @@
             <nav class="sidebar-menu">
                 <a href="homepage.html" class="menu-item"><span>🏠</span> Homepage</a>
                 <a href="fictionproject.html" class="menu-item"><span>📚</span> Fiction projects</a>
+                <a href="writing.html" class="menu-item"><span>✍️</span> Writing / Episodes</a>
                 <a href="characters.html" class="menu-item"><span>👥</span> Characters</a>
                 <a href="worldbuilding.html" class="menu-item active"><span>🌍</span> Worldbuilding</a>
-                <a href="#" class="menu-item"><span>⏳</span> Timeline เรื่อง</a>
-                <a href="#" class="menu-item"><span>💾</span> สำรองข้อมูล Cloud</a>
+                <a href="timeline.html" class="menu-item"><span>⏳</span> Timeline</a>
             </nav>
             
             <div class="sidebar-footer">
@@ -53,7 +56,7 @@
             <!-- Header Search & Actions -->
             <header class="main-header">
                 <div class="search-bar">
-                    <input type="text" id="search-input" placeholder="ค้นหาชื่อสถานที่, เผ่าพันธุ์, ระบบพลัง, วัฒนธรรม...">
+                    <input type="text" id="search-input" placeholder="ค้นหาชื่อสถานที่, เผ่าพันธุ์, กลุ่มองค์กร, ระบบพลัง...">
                 </div>
                 <button class="btn-create" id="btn-open-wb-modal">+ เพิ่มข้อมูล Worldbuilding</button>
             </header>
@@ -62,30 +65,31 @@
             <section class="section-header project-selector-bar">
                 <div>
                     <div class="project-title-wrapper">
-                        <h2>คลังข้อมูล Worldbuilding</h2>
+                        <h2 style="color: #ffffff; font-size: 1.6rem; margin-bottom: 4px;">คลังข้อมูล Worldbuilding</h2>
                         <div class="select-project-container">
-                            <label for="select-project">เลือกโปรเจกต์:</label>
+                            <label for="select-project">เลือก Project : </label>
                             <select id="select-project" class="select-input project-dropdown">
                                 <option value="">กำลังโหลดโปรเจกต์...</option>
                             </select>
                         </div>
                     </div>
-                    <p style="color: #657e85; font-size: 0.9rem;">จัดการรายละเอียดสถานที่ เผ่าพันธุ์ วัฒนธรรม ระบบพลัง และข้อมูลองค์ประกอบโลก</p>
+                    <p style="color: #657e85; font-size: 0.9rem;">จัดการรายละเอียดสถานที่ เผ่าพันธุ์ กลุ่มองค์กร วัฒนธรรม ระบบพลัง และองค์ประกอบโลก</p>
                 </div>
             </section>
 
-            <!-- Category Tabs -->
+            <!-- Category Filter Tabs -->
             <div class="wb-tabs" id="filter-container">
                 <button class="tab-btn active" data-category="all">ทั้งหมด (0)</button>
                 <button class="tab-btn" data-category="location">🏰 สถานที่/เมือง (0)</button>
                 <button class="tab-btn" data-category="power">✨ ระบบพลังวิเศษ (0)</button>
                 <button class="tab-btn" data-category="race">🧝 เผ่าพันธุ์/สิ่งมีชีวิต (0)</button>
+                <button class="tab-btn" data-category="faction">🛡️ กลุ่ม/หน่วยงาน (0)</button>
                 <button class="tab-btn" data-category="culture">📜 วัฒนธรรม/ศาสนา (0)</button>
                 <button class="tab-btn" data-category="tech">⚙️ เทคโนโลยี/ระบบเงิน (0)</button>
                 <button class="tab-btn" data-category="history">🏛️ ประวัติศาสตร์ (0)</button>
             </div>
 
-            <!-- Worldbuilding Items Grid -->
+            <!-- Worldbuilding Display Grid -->
             <div class="character-grid" id="wb-container">
                 <div class="loading-state">กรุณาเลือกโปรเจกต์เพื่อแสดงข้อมูล Worldbuilding</div>
             </div>
@@ -103,7 +107,7 @@
                 <input type="hidden" id="wb-id">
                 <div class="form-group">
                     <label for="wb-title">ชื่อหัวข้อ / องค์ประกอบ</label>
-                    <input type="text" id="wb-title" required placeholder="เช่น มหาอาณาจักรแอสทาเรีย, เวทมนตร์ละอองดาว, เผ่าเอลฟ์โบราณ">
+                    <input type="text" id="wb-title" required placeholder="เช่น มหาอาณาจักรแอสทาเรีย, สมาคมการค้าภาคีเงิน, เผ่าเอลฟ์โบราณ">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
@@ -112,23 +116,24 @@
                             <option value="location">🏰 ประเทศ / เมือง / สถานที่</option>
                             <option value="power">✨ ระบบพลังวิเศษ</option>
                             <option value="race">🧝 เผ่าพันธุ์ / สิ่งมีชีวิต</option>
+                            <option value="faction">🛡️ กลุ่ม / องค์กร / หน่วยงาน</option>
                             <option value="culture">📜 วัฒนธรรม / ศาสนา / ภาษา</option>
                             <option value="tech">⚙️ เทคโนโลยี / ระบบเงิน</option>
                             <option value="history">🏛️ ประวัติศาสตร์ / ตำนาน</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="wb-tags">แท็กคำค้น (ย่อย)</label>
-                        <input type="text" id="wb-tags" placeholder="เช่น ธาตุไฟ, ทางตอนเหนือ, ศักดิ์สิทธิ์">
+                        <label for="wb-tags">แท็กคำค้น (คำสั้นๆ)</label>
+                        <input type="text" id="wb-tags" placeholder="เช่น กิลด์นักผจญภัย, ภาคีลับ, ฝ่ายอธรรม">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="wb-desc">คำอธิบายย่อ</label>
-                    <textarea id="wb-desc" rows="2" placeholder="สรุปสั้นๆ สำหรับแสดงบนการ์ด..." required></textarea>
+                    <textarea id="wb-desc" rows="2" placeholder="สรุปสั้นๆ สำหรับแสดงบนหน้าการ์ด..." required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="wb-content">รายละเอียดเชิงลึก / กฎระเบียบ</label>
-                    <textarea id="wb-content" rows="5" placeholder="ระบุเงื่อนไข ประวัติความเป็นมา ข้อจำกัด หรือรายละเอียดเชิงลึก..."></textarea>
+                    <textarea id="wb-content" rows="5" placeholder="ระบุโครงสร้างการบริหาร, สมาชิกสำคัญ, ประวัติความเป็นมา หรือเป้าหมายของกลุ่ม..."></textarea>
                 </div>
                 <div class="modal-actions">
                     <button type="button" class="btn-cancel" id="btn-cancel-wb-modal">ยกเลิก</button>
@@ -138,7 +143,7 @@
         </div>
     </div>
 
-    <!-- Firebase Script Controller -->
-    <script type="module" src="script/worldbuilding"></script>
+    <!-- Firebase Controller Module -->
+    <script type="module" src="script/worldbuilding.js"></script>
 </body>
 </html>

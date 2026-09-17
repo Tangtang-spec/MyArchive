@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiction Archive - รายละเอียด Worldbuilding</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_char.css">
+    <link rel="stylesheet" href="css/style_project.css">
+    <link rel="stylesheet" href="css/style_profile_detail.css">
+    <link rel="stylesheet" href="css/profilestyle.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Fiction Archive</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="homepage.html" class="menu-item"><span>🏠</span> Homepage</a>
+                <a href="fictionproject.html" class="menu-item"><span>📚</span> Fiction projects</a>
+                <a href="writing.html" class="menu-item"><span>✍️</span> Writing / Episodes</a>
+                <a href="characters.html" class="menu-item"><span>👥</span> Characters</a>
+                <a href="worldbuilding.html" class="menu-item active"><span>🌍</span> Worldbuilding</a>
+                <a href="timeline.html" class="menu-item"><span>⏳</span> Timeline</a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar" id="user-avatar">U</div>
+                    <div class="user-info">
+                        <span class="username" id="user-name">กำลังโหลด...</span>
+                        <span class="role" id="user-role">ผู้ใช้งาน</span>
+                    </div>
+
+                    <div class="profile-dropdown">
+                        <a href="profile.html" class="dropdown-item"><span>👤</span> โปรไฟล์ (Profile)</a>
+                        <a href="settings.html" class="dropdown-item"><span>⚙️</span> การตั้งค่า</a>
+                        <hr style="border: 0; border-top: 1px solid #142126; margin: 6px 0;">
+                        <a href="#" class="dropdown-item logout-item" id="btn-logout"><span>🚪</span> ออกจากระบบ</a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content" style="grid-column: span 2;">
+            <header class="main-header">
+                <a href="worldbuilding.html" class="btn-create" style="text-decoration: none; background: #111e24; color: #b2c4c7;">⬅️ กลับหน้า Worldbuilding</a>
+            </header>
+
+            <div class="char-detail-grid">
+                <!-- Left Overview Card -->
+                <div class="char-overview-card">
+                    <div class="char-avatar-large" id="wb-icon-container">🌍</div>
+                    <h1 class="char-fullname" id="wb-title">กำลังโหลด...</h1>
+                    <span class="char-role-badge badge-main" id="wb-category-badge">หมวดหมู่</span>
+
+                    <div class="char-quick-info">
+                        <div class="info-item">
+                            <span class="info-label">แท็กคำค้น:</span>
+                            <span class="info-value" id="wb-tags">-</span>
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <span class="info-label">คำอธิบายย่อ:</span>
+                            <p class="text-content" id="wb-desc" style="font-size: 0.85rem; margin-top: 4px;">-</p>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-edit-section btn-edit-overview" id="btn-edit-overview">✏️ แก้ไขข้อมูลทั่วไป</button>
+                </div>
+
+                <!-- Right Detailed Information -->
+                <div class="char-content-panel">
+
+                    <!-- Section: สถานที่ / เมือง (Location) -->
+                    <div class="detail-section category-section" id="section-location" style="display: none;">
+                        <div class="section-title">
+                            <span>🏔️ สภาพแวดล้อมและภูมิประเทศ</span>
+                            <button class="btn-edit-section" id="btn-edit-location">✏️ แก้ไข</button>
+                        </div>
+                        <p class="text-content" id="wb-environment">ไม่มีข้อมูลสภาพแวดล้อม</p>
+                    </div>
+
+                    <!-- Section: ระบบพลังวิเศษ (Power System) -->
+                    <div class="detail-section category-section" id="section-power" style="display: none;">
+                        <div class="section-title">
+                            <span>✨ คุณสมบัติและแหล่งที่มาของพลัง</span>
+                            <button class="btn-edit-section" id="btn-edit-power">✏️ แก้ไข</button>
+                        </div>
+                        <div class="psychology-grid">
+                            <div class="trait-box">
+                                <div class="trait-title">คุณสมบัติ / ประเภทพลัง</div>
+                                <div class="trait-desc" id="wb-power-properties">-</div>
+                            </div>
+                            <div class="trait-box">
+                                <div class="trait-title">แหล่งที่มาของพลัง</div>
+                                <div class="trait-desc" id="wb-power-source">-</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 16px;">
+                            <div class="trait-title" style="color:#0EF1F1; margin-bottom: 6px;">การใช้งาน / ท่าไม้ตาย / วิชา</div>
+                            <p class="text-content" id="wb-power-techniques">ไม่มีข้อมูลวิชาการใช้งาน</p>
+                        </div>
+                    </div>
+
+                    <!-- Section: เผ่าพันธุ์ / สิ่งมีชีวิต (Race) -->
+                    <div class="detail-section category-section" id="section-race" style="display: none;">
+                        <div class="section-title">
+                            <span>🧝 กายภาพและความสามารถประจำเผ่า</span>
+                            <button class="btn-edit-section" id="btn-edit-race">✏️ แก้ไข</button>
+                        </div>
+                        <div class="psychology-grid">
+                            <div class="trait-box">
+                                <div class="trait-title">ลักษณะทางกายภาพ</div>
+                                <div class="trait-desc" id="wb-race-physical">-</div>
+                            </div>
+                            <div class="trait-box">
+                                <div class="trait-title">ความสามารถพิเศษประจำเผ่า</div>
+                                <div class="trait-desc" id="wb-race-abilities">-</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 16px;">
+                            <div class="trait-title" style="color:#0EF1F1; margin-bottom: 6px;">เผ่าพันธุ์ย่อย / สายเลือด</div>
+                            <p class="text-content" id="wb-race-subraces">ไม่มีข้อมูลเผ่าพันธุ์ย่อย</p>
+                        </div>
+                    </div>
+
+                    <!-- Section: กลุ่ม / หน่วยงาน (Faction) -->
+                    <div class="detail-section category-section" id="section-faction" style="display: none;">
+                        <div class="section-title">
+                            <span>🛡️ เครือข่ายและโครงสร้างองค์กร</span>
+                            <button class="btn-edit-section" id="btn-edit-faction">✏️ แก้ไข</button>
+                        </div>
+                        <p class="text-content" id="wb-faction-network">ไม่มีข้อมูลเครือข่ายองค์กร</p>
+                    </div>
+
+                    <!-- Section: วัฒนธรรม / ศาสนา (Culture) -->
+                    <div class="detail-section category-section" id="section-culture" style="display: none;">
+                        <div class="section-title">
+                            <span>📜 ตำนาน ความเชื่อ และพิธีกรรม</span>
+                            <button class="btn-edit-section" id="btn-edit-culture">✏️ แก้ไข</button>
+                        </div>
+                        <p class="text-content" id="wb-culture-beliefs">ไม่มีข้อมูลตำนานและความเชื่อ</p>
+                    </div>
+
+                    <!-- Section: เทคโนโลยี / ระบบเงิน (Tech) -->
+                    <div class="detail-section category-section" id="section-tech" style="display: none;">
+                        <div class="section-title">
+                            <span>⚙️ การใช้งานและการพัฒนา</span>
+                            <button class="btn-edit-section" id="btn-edit-tech">✏️ แก้ไข</button>
+                        </div>
+                        <div class="psychology-grid">
+                            <div class="trait-box">
+                                <div class="trait-title">การใช้งาน / กลไก</div>
+                                <div class="trait-desc" id="wb-tech-usage">-</div>
+                            </div>
+                            <div class="trait-box">
+                                <div class="trait-title">ประวัติการพัฒนา</div>
+                                <div class="trait-desc" id="wb-tech-development">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section: ประวัติศาสตร์ (History) -->
+                    <div class="detail-section category-section" id="section-history" style="display: none;">
+                        <div class="section-title">
+                            <span>🏛️ ประวัติศาสตร์และเหตุการณ์สำคัญ</span>
+                            <button class="btn-edit-section" id="btn-edit-history">✏️ แก้ไข</button>
+                        </div>
+                        <p class="text-content" id="wb-history-details">ไม่มีข้อมูลประวัติศาสตร์</p>
+                        <div style="margin-top: 16px;">
+                            <a id="btn-link-timeline" href="#" class="btn-auth" style="display: inline-block; text-decoration: none; text-align: center; width: auto; padding: 8px 16px;">⏳ ไปยัง Timeline ของโปรเจกต์นี้</a>
+                        </div>
+                    </div>
+
+                    <!-- Common Details Field -->
+                    <div class="detail-section">
+                        <div class="section-title">
+                            <span>📄 รายละเอียดเพิ่มเติม / กฎระเบียบ</span>
+                            <button class="btn-edit-section" id="btn-edit-content">✏️ แก้ไข</button>
+                        </div>
+                        <p class="text-content" id="wb-content">ไม่มีรายละเอียดเพิ่มเติม</p>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: Overview -->
+    <div class="modal-overlay" id="modal-overview">
+        <div class="modal-card wb-modal-card">
+            <div class="modal-header">
+                <h3>แก้ไขข้อมูลทั่วไป</h3>
+                <span class="close-modal btn-close-modal">&times;</span>
+            </div>
+            <form id="form-overview">
+                <div class="form-group">
+                    <label>ชื่อหัวข้อ / องค์ประกอบ</label>
+                    <input type="text" id="input-title" required>
+                </div>
+                <div class="form-group">
+                    <label>แท็กคำค้น</label>
+                    <input type="text" id="input-tags">
+                </div>
+                <div class="form-group">
+                    <label>คำอธิบายย่อ</label>
+                    <textarea id="input-desc" rows="3" required></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel btn-close-modal">ยกเลิก</button>
+                    <button type="submit" class="btn-auth">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODALS Dynamic per Category -->
+    <div class="modal-overlay" id="modal-category">
+        <div class="modal-card wb-modal-card">
+            <div class="modal-header">
+                <h3 id="modal-category-title">แก้ไขรายละเอียดเฉพาะหมวดหมู่</h3>
+                <span class="close-modal btn-close-modal">&times;</span>
+            </div>
+            <form id="form-category">
+                <div id="modal-category-fields"></div>
+                <div class="modal-actions" style="margin-top: 15px;">
+                    <button type="button" class="btn-cancel btn-close-modal">ยกเลิก</button>
+                    <button type="submit" class="btn-auth">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: Content -->
+    <div class="modal-overlay" id="modal-content">
+        <div class="modal-card wb-modal-card">
+            <div class="modal-header">
+                <h3>แก้ไขรายละเอียดเพิ่มเติม / กฎระเบียบ</h3>
+                <span class="close-modal btn-close-modal">&times;</span>
+            </div>
+            <form id="form-content">
+                <div class="form-group">
+                    <label>รายละเอียดเพิ่มเติม</label>
+                    <textarea id="input-content" rows="8"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel btn-close-modal">ยกเลิก</button>
+                    <button type="submit" class="btn-auth">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="script/worldbuilding-detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiction Archive - Character Relationship Graph</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_char.css">
+    <link rel="stylesheet" href="css/style_project.css">
+    <link rel="stylesheet" href="css/style_graph.css">
+    <link rel="stylesheet" href="css/profilestyle.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Vis Network Library -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Fiction Archive</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="homepage.html" class="menu-item"><span>🏠</span> Homepage</a>
+                <a href="fictionproject.html" class="menu-item"><span>📚</span> Fiction projects</a>
+                <a href="writing.html" class="menu-item"><span>✍️</span> Writing / Episodes</a>
+                <a href="characters.html" class="menu-item active"><span>👥</span> Characters</a>
+                <a href="worldbuilding.html" class="menu-item"><span>🌍</span> Worldbuilding</a>
+                <a href="timeline.html" class="menu-item"><span>⏳</span> Timeline</a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar" id="user-avatar">U</div>
+                    <div class="user-info">
+                        <span class="username" id="user-name">กำลังโหลด...</span>
+                        <span class="role" id="user-role">ผู้ใช้งาน</span>
+                    </div>
+
+                    <div class="profile-dropdown">
+                        <a href="profile.html" class="dropdown-item"><span>👤</span> โปรไฟล์ (Profile)</a>
+                        <a href="settings.html" class="dropdown-item"><span>⚙️</span> การตั้งค่า</a>
+                        <hr style="border: 0; border-top: 1px solid #142126; margin: 6px 0;">
+                        <a href="#" class="dropdown-item logout-item" id="btn-logout"><span>🚪</span> ออกจากระบบ</a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content" style="grid-column: span 2;">
+            <header class="main-header">
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="ค้นหาโหนดตัวละคร...">
+                </div>
+                <a href="characters.html" class="btn-create btn-view-card">📋 มุมมองการ์ดรายการ</a>
+            </header>
+
+            <section class="section-header project-selector-bar">
+                <div>
+                    <div class="project-title-wrapper">
+                        <h2>แผนผังความสัมพันธ์ตัวละคร (Visual Graph)</h2>
+                        <div class="select-project-container">
+                            <label for="select-project">เลือกโปรเจกต์:</label>
+                            <select id="select-project" class="select-input project-dropdown">
+                                <option value="">กำลังโหลดโปรเจกต์...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="subtitle-desc">กราฟแสดงการเชื่อมโยงความสัมพันธ์ของตัวละครในเรื่องแบบโต้ตอบอัตโนมัติ</p>
+                </div>
+            </section>
+
+            <!-- Graph Canvas Container -->
+            <div class="graph-wrapper">
+                <div class="graph-controls">
+                    <button class="graph-btn" id="btn-reset-zoom">🔍 รีเซ็ตมุมมอง</button>
+                    <button class="graph-btn" id="btn-relayout">🔄 จัดตำแหน่งใหม่</button>
+                </div>
+
+                <div class="graph-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot main"></div>
+                        <span>ตัวละครเอก (Main)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot supporting"></div>
+                        <span>ตัวละครสมทบ (Supporting)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot antagonist"></div>
+                        <span>ฝ่ายตรงข้าม (Antagonist)</span>
+                    </div>
+                </div>
+
+                <!-- Info Panel -->
+                <div class="node-detail-panel" id="node-panel">
+                    <button id="btn-close-panel" class="btn-close-panel">&times;</button>
+                    <h3 id="panel-name" class="panel-title">ชื่อตัวละคร</h3>
+                    <p id="panel-role" class="panel-role-text">บทบาท</p>
+                    <p id="panel-desc" class="panel-desc-text">คำอธิบาย...</p>
+                </div>
+
+                <div id="network-container"></div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="script/character-graph.js"></script>
+</body>
+</html>

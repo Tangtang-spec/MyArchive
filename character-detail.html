@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiction Archive - ข้อมูลตัวละครเชิงลึก</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_char.css">
+    <link rel="stylesheet" href="css/style_project.css">
+    <link rel="stylesheet" href="css/style_profile_detail.css">
+    <link rel="stylesheet" href="css/profilestyle.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Fiction Archive</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="homepage.html" class="menu-item"><span>🏠</span> Homepage</a>
+                <a href="fictionproject.html" class="menu-item"><span>📚</span> Fiction projects</a>
+                <a href="writing.html" class="menu-item"><span>✍️</span> Writing / Episodes</a>
+                <a href="characters.html" class="menu-item active"><span>👥</span> Characters</a>
+                <a href="worldbuilding.html" class="menu-item"><span>🌍</span> Worldbuilding</a>
+                <a href="timeline.html" class="menu-item"><span>⏳</span> Timeline</a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar" id="user-avatar">U</div>
+                    <div class="user-info">
+                        <span class="username" id="user-name">กำลังโหลด...</span>
+                        <span class="role" id="user-role">ผู้ใช้งาน</span>
+                    </div>
+
+                    <div class="profile-dropdown">
+                        <a href="profile.html" class="dropdown-item"><span>👤</span> โปรไฟล์ (Profile)</a>
+                        <a href="settings.html" class="dropdown-item"><span>⚙️</span> การตั้งค่า</a>
+                        <hr style="border: 0; border-top: 1px solid #142126; margin: 6px 0;">
+                        <a href="#" class="dropdown-item logout-item" id="btn-logout"><span>🚪</span> ออกจากระบบ</a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content" style="grid-column: span 2;">
+            <header class="main-header">
+                <a href="characters.html" class="btn-create" style="text-decoration: none; background: #111e24; color: #b2c4c7;">⬅️ กลับหน้าตัวละคร</a>
+            </header>
+
+            <div class="char-detail-grid">
+                <!-- Left Overview Card -->
+                <div class="char-overview-card">
+                    <div class="char-avatar-large" id="char-avatar-container">?</div>
+                    <h1 class="char-fullname" id="char-name">กำลังโหลด...</h1>
+                    <span class="char-role-badge badge-main" id="char-role-badge">บทบาท</span>
+
+                    <div class="char-quick-info">
+                        <div class="info-item">
+                            <span class="info-label">อายุ:</span>
+                            <span class="info-value" id="info-age">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">เพศ:</span>
+                            <span class="info-value" id="info-gender">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">เผ่าพันธุ์/สปีชีส์:</span>
+                            <span class="info-value" id="info-race">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">อาชีพ/สถานะ:</span>
+                            <span class="info-value" id="info-occupation">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">สังกัด/ฝ่าย:</span>
+                            <span class="info-value" id="info-faction">-</span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-edit-section btn-edit-overview" id="btn-open-edit-overview">✏️ แก้ไขข้อมูลทั่วไป</button>
+                </div>
+
+                <!-- Right Detailed Information -->
+                <div class="char-content-panel">
+                    <!-- Section: จิตวิทยาและบุคลิกภาพ -->
+                    <div class="detail-section">
+                        <div class="section-title">
+                            <span>🧠 จิตวิทยาและบุคลิกภาพ (Psychology & Persona)</span>
+                            <button class="btn-edit-section" id="btn-open-edit-psychology">✏️ แก้ไข</button>
+                        </div>
+                        <div class="psychology-grid">
+                            <div class="trait-box">
+                                <div class="trait-title">จุดเด่น / นิสัยหลัก</div>
+                                <div class="trait-desc" id="char-personality">-</div>
+                            </div>
+                            <div class="trait-box">
+                                <div class="trait-title">แรงจูงใจ (Motivation)</div>
+                                <div class="trait-desc" id="char-motivation">-</div>
+                            </div>
+                            <div class="trait-box">
+                                <div class="trait-title">ปมในใจ / ความกลัว (Fear)</div>
+                                <div class="trait-desc" id="char-fear">-</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section: ประวัติความเป็นมา -->
+                    <div class="detail-section">
+                        <div class="section-title">
+                            <span>📖 ประวัติความเป็นมา (Backstory)</span>
+                            <button class="btn-edit-section" id="btn-open-edit-backstory">✏️ แก้ไข</button>
+                        </div>
+                        <p class="text-content" id="char-backstory">ไม่มีข้อมูลประวัติความเป็นมา</p>
+                    </div>
+
+                    <!-- Section: ทักษะและความสามารถ -->
+                    <div class="detail-section">
+                        <div class="section-title">
+                            <span>⚡ ทักษะและความสามารถพิเศษ (Abilities & Skills)</span>
+                            <button class="btn-edit-section" id="btn-open-edit-abilities">✏️ แก้ไข</button>
+                        </div>
+                        <p class="text-content" id="char-abilities">ไม่มีข้อมูลทักษะพิเศษ</p>
+                    </div>
+
+                    <!-- Section: สายสัมพันธ์ -->
+                    <div class="detail-section">
+                        <div class="section-title">
+                            <span>🔗 ความสัมพันธ์กับตัวละครอื่น (Relationships)</span>
+                        </div>
+                        <div class="rel-list" id="char-relationships">
+                            <p style="color: #657e85; font-size: 0.85rem;">ยังไม่มีการเชื่อมโยงความสัมพันธ์</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL 1: แก้ไขข้อมูลทั่วไป (Overview) -->
+    <div class="modal-overlay" id="modal-edit-overview">
+        <div class="modal-card char-modal-card">
+            <div class="modal-header">
+                <h3>แก้ไขข้อมูลทั่วไป</h3>
+                <span class="close-modal" class="btn-close-modal">&times;</span>
+            </div>
+            <form id="form-edit-overview">
+                <div class="form-group">
+                    <label>ชื่อตัวละคร</label>
+                    <input type="text" id="input-edit-name" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>บทบาท</label>
+                        <select id="input-edit-role" class="select-input">
+                            <option value="Main">ตัวละครเอก (Main)</option>
+                            <option value="Supporting">ตัวละครสมทบ (Supporting)</option>
+                            <option value="Antagonist">ฝ่ายตรงข้าม (Antagonist)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>อายุ</label>
+                        <input type="text" id="input-edit-age" placeholder="เช่น 24 ปี">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>เพศ</label>
+                        <input type="text" id="input-edit-gender" placeholder="เช่น ชาย, หญิง">
+                    </div>
+                    <div class="form-group">
+                        <label>เผ่าพันธุ์ / สปีชีส์</label>
+                        <input type="text" id="input-edit-race" placeholder="เช่น มนุษย์, เอลฟ์">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>อาชีพ / สถานะ</label>
+                        <input type="text" id="input-edit-occupation" placeholder="เช่น จอมเวท, นักรบ">
+                    </div>
+                    <div class="form-group">
+                        <label>สังกัด / ฝ่าย</label>
+                        <input type="text" id="input-edit-faction" placeholder="เช่น ภาคีอัศวิน">
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel btn-close-modal">ยกเลิก</button>
+                    <button type="submit" class="btn-auth">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: แก้ไขจิตวิทยาและบุคลิกภาพ -->
+    <div class="modal-overlay" id="modal-edit-psychology">
+        <div class="modal-card char-modal-card">
+            <div class="modal-header">
+                <h3>แก้ไขจิตวิทยาและบุคลิกภาพ</h3>
+                <span class="close-modal" class="btn-close-modal">&times;</span>
+            </div>
+            <form id="form-edit-psychology">
+                <div class="form-group">
+                    <label>จุดเด่น / นิสัยหลัก</label>
+                    <textarea id="input-edit-personality" rows="3" placeholder="เช่น สุขุม นิ่งเงียบ รักพวกพ้อง"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>แรงจูงใจ (Motivation)</label>
+                    <textarea id="input-edit-motivation" rows="3" placeholder="เช่น ต้องการปกป้องบ้านเกิด"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>ปมในใจ / ความกลัว (Fear)</label>
+                    <textarea id="input-edit-fear" rows="3" placeholder="เช่น กลัวการสูญเสีย"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel btn-close-modal">ยกเลิก</button>
+                    <button type="submit" class="btn-auth">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: แก้ไขประวัติความเป็นมา -->
+    <div class="modal-overlay" id="modal-edit-backstory">
+        <div class="modal-card char-modal-card">
+            <div class="modal-header">
+                <h3>แก้ไขประวัติความเป็นมา</h3>
+                <span class="close-modal" class="btn-close-modal">&times;</span>
+            </div>
+            <form id="form-edit-backstory">
+                <div class="form-group">
+                    <label>ประวัติความเป็นมา (Backstory)</label>
+                    <textarea id="input-edit-backstory" rows="8" placeholder="เขียนประวัติย่อหรืออดีตของตัวละคร..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel btn-close-modal">ยกเลิก</button>
+                    <button type="submit" class="btn-auth">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: แก้ไขทักษะและความสามารถ -->
+    <div class="modal-overlay" id="modal-edit-abilities">
+        <div class="modal-card char-modal-card">
+            <div class="modal-header">
+                <h3>แก้ไขทักษะและความสามารถ</h3>
+                <span class="close-modal" class="btn-close-modal">&times;</span>
+            </div>
+            <form id="form-edit-abilities">
+                <div class="form-group">
+                    <label>ทักษะและความสามารถพิเศษ (Abilities & Skills)</label>
+                    <textarea id="input-edit-abilities" rows="6" placeholder="เช่น เวทมนตร์สายฟ้าขั้นสูง, วิชาดาบเดี่ยว..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel btn-close-modal">ยกเลิก</button>
+                    <button type="submit" class="btn-auth">บันทึก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="script/character-detail.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+/* --- Episodes Container Layout --- */
+.episodes-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+/* --- Episode Card --- */
+.episode-item-card {
+    display: flex;
+    align-items: center;
+    background-color: #081014;
+    border: 1px solid #142126;
+    border-radius: 12px;
+    padding: 16px 20px;
+    gap: 16px;
+    transition: all 0.2s ease;
+}
+
+.episode-item-card:hover {
+    border-color: rgba(14, 241, 241, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Order Reorder Buttons --- */
+.order-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.btn-order {
+    background-color: #0b1114;
+    border: 1px solid #142126;
+    color: #657e85;
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.btn-order:hover:not(:disabled) {
+    color: #0EF1F1;
+    border-color: #0EF1F1;
+    background-color: rgba(14, 241, 241, 0.1);
+}
+
+.btn-order:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* --- Episode Content Info --- */
+.episode-badge {
+    background-color: rgba(14, 241, 241, 0.1);
+    color: #0EF1F1;
+    border: 1px solid rgba(14, 241, 241, 0.2);
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.episode-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.episode-details h4 {
+    color: #ffffff;
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.episode-details .preview-text {
+    color: #657e85;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.episode-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #8a9e9e;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+/* --- Modal Editor Specifics --- */
+.episode-modal-card {
+    max-width: 800px;
+    width: 90%;
+}
+
+.episode-modal-card textarea {
+    width: 100%;
+    background-color: #050b0c;
+    border: 1px solid #142126;
+    border-radius: 8px;
+    color: #ffffff;
+    padding: 12px;
+    font-family: 'Sarabun', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    resize: vertical;
+}
+
+.episode-modal-card textarea:focus {
+    outline: none;
+    border-color: #0EF1F1;
+}
+
+@media (max-width: 768px) {
+    .episode-item-card {
+        flex-wrap: wrap;
+    }
+    
+    .episode-meta {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

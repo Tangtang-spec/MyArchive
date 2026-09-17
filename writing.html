@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiction Archive - เขียนเนื้อเรื่อง</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_project.css">
+    <link rel="stylesheet" href="css/style_writing.css">
+    <link rel="stylesheet" href="css/profilestyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Fiction Archive</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="homepage.html" class="menu-item"><span>🏠</span> Homepage</a>
+                <a href="fictionproject.html" class="menu-item"><span>📚</span> Fiction projects</a>
+                <a href="writing.html" class="menu-item active"><span>✍️</span> Writing / Episodes</a>
+                <a href="characters.html" class="menu-item"><span>👥</span> Characters</a>
+                <a href="worldbuilding.html" class="menu-item"><span>🌍</span> Worldbuilding</a>
+                <a href="timeline.html" class="menu-item"><span>⏳</span> Timeline</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar" id="user-avatar">U</div>
+                    <div class="user-info">
+                        <span class="username" id="user-name">กำลังโหลด...</span>
+                        <span class="role" id="user-role">ผู้ใช้งาน</span>
+                    </div>
+
+                    <div class="profile-dropdown">
+                        <a href="profile.html" class="dropdown-item"><span>👤</span> โปรไฟล์ (Profile)</a>
+                        <a href="settings.html" class="dropdown-item"><span>⚙️</span> การตั้งค่า</a>
+                        <hr style="border: 0; border-top: 1px solid #142126; margin: 6px 0;">
+                        <a href="#" class="dropdown-item logout-item" id="btn-logout"><span>🚪</span> ออกจากระบบ</a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" style="grid-column: span 2;">
+            <header class="main-header">
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="ค้นหาชื่อตอน หรือเนื้อหาในบท...">
+                </div>
+                <button class="btn-create" id="btn-open-modal">+ เพิ่มตอนใหม่ (Episode)</button>
+            </header>
+
+        <section class="section-header">
+            <div>
+                <!-- เพิ่ม Dropdown เลือกโปรเจกต์กรณีไม่มี ID ใน URL -->
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <h2 id="project-title-heading" style="color: #ffffff; font-size: 1.6rem; margin: 0;">กำลังโหลด...</h2>
+                    <select id="project-select-dropdown" class="select-input" style="display: none; width: auto; padding: 6px 12px;">
+                        <option value="">-- เลือกโปรเจกต์ --</option>
+                    </select>
+                </div>
+                <p style="color: #7b8e91; font-size: 0.9rem;">จัดการบทนิยาย เขียนเนื้อหา และปรับแต่งลำดับของ Episode</p>
+            </div>
+        </section>
+
+            <!-- รายการ Episode -->
+            <div class="episodes-list-container" id="episodes-container">
+                <div class="loading-state">กำลังโหลดรายการตอน...</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal เขียน/แก้ไข Episode -->
+    <div id="episode-modal" class="modal-overlay">
+        <div class="modal-card episode-modal-card">
+            <div class="modal-header">
+                <h3 id="modal-title">เขียนตอนใหม่</h3>
+                <span class="close-modal" id="btn-close-modal">&times;</span>
+            </div>
+            <form id="episode-form">
+                <input type="hidden" id="episode-id">
+                <input type="hidden" id="episode-order">
+
+                <div class="form-group">
+                    <label for="episode-title">ชื่อตอน / Episode Title</label>
+                    <input type="text" id="episode-title" placeholder="เช่น บทที่ 1: การจุดประกายแห่งเวทมนตร์" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="episode-content">เนื้อหาเรื่องราว</label>
+                    <textarea id="episode-content" rows="14" placeholder="พิมพ์เนื้อเรื่องนิยายของคุณที่นี่..." required></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" id="btn-cancel-modal">ยกเลิก</button>
+                    <button type="submit" class="btn-auth" id="btn-submit-episode">บันทึกเนื้อหา</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script type="module" src="script/writing.js"></script>
+</body>
+</html>

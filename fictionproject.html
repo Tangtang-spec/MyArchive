@@ -22,10 +22,10 @@
             <nav class="sidebar-menu">
                 <a href="homepage.html" class="menu-item"><span>🏠</span> Homepage</a>
                 <a href="fictionproject.html" class="menu-item active"><span>📚</span> Fiction projects</a>
+                <a href="writing.html" class="menu-item"><span>✍️</span> Writing / Episodes</a>
                 <a href="characters.html" class="menu-item"><span>👥</span> Characters</a>
                 <a href="worldbuilding.html" class="menu-item"><span>🌍</span> Worldbuilding</a>
-                <a href="#" class="menu-item"><span>⏳</span> Timeline</a>
-                <a href="#" class="menu-item"><span>💾</span> สำรองข้อมูล</a>
+                <a href="timeline.html" class="menu-item"><span>⏳</span> Timeline</a>
             </nav>
 
             <div class="sidebar-footer">
@@ -46,7 +46,7 @@
             </div>
         </aside>
 
-        <!-- Main Content (เต็มพื้นที่ 2 คอลัมน์) -->
+        <!-- Main Content -->
         <main class="main-content" style="grid-column: span 2;">
             <header class="main-header">
                 <div class="search-bar">
@@ -62,7 +62,7 @@
                 </div>
             </section>
 
-            <!-- หมวดหมู่สำหรับกรองข้อมูล (Genre Filter) -->
+            <!-- Genre Filter -->
             <div class="filter-container" id="filter-container">
                 <button class="btn-filter active" data-genre="all">ทั้งหมด (0)</button>
                 <button class="btn-filter" data-genre="Fantasy">Fantasy</button>
@@ -77,14 +77,15 @@
         </main>
     </div>
 
-    <!-- Modal หน้าต่างสร้าง New Project -->
+    <!-- Modal 1: สร้าง / แก้ไข Project -->
     <div id="project-modal" class="modal-overlay">
         <div class="modal-card project-modal-card">
             <div class="modal-header">
-                <h3>สร้างโปรเจกต์ใหม่</h3>
+                <h3 id="modal-title">สร้างโปรเจกต์ใหม่</h3>
                 <span class="close-modal" id="btn-close-modal">&times;</span>
             </div>
-            <form id="create-project-form">
+            <form id="project-form">
+                <input type="hidden" id="project-id">
                 <div class="form-group">
                     <label for="project-title">ชื่อโปรเจกต์ / นิยาย</label>
                     <input type="text" id="project-title" placeholder="เช่น ตำนานมหาสงครามเวทมนตร์" required>
@@ -107,14 +108,60 @@
                 </div>
                 <div class="modal-actions">
                     <button type="button" class="btn-cancel" id="btn-cancel-modal">ยกเลิก</button>
-                    <button type="submit" class="btn-auth">สร้างโปรเจกต์</button>
+                    <button type="submit" class="btn-auth" id="btn-submit-project">สร้างโปรเจกต์</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Firebase SDK & Controller logic -->
+    <!-- Modal 2: แสดงรายละเอียดโปรเจกต์โดยรวม & ลิงก์เชื่อมโยงไปยังหัวข้อต่างๆ -->
+    <div id="project-detail-modal" class="modal-overlay">
+        <div class="modal-card project-modal-card">
+            <div class="modal-header">
+                <h3 id="detail-title">รายละเอียดโปรเจกต์</h3>
+                <span class="close-modal" id="btn-close-detail-modal">&times;</span>
+            </div>
+            <div class="detail-body" style="padding: 10px 0;">
+                <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 12px;">
+                    <span class="btn-filter active" id="detail-genre" style="padding: 4px 12px; font-size: 0.8rem;">Genre</span>
+                    <span id="detail-updated-at" style="color: #657e85; font-size: 0.85rem;">อัปเดตล่าสุด: -</span>
+                </div>
+
+                <p id="detail-desc" style="color: #b2c4c7; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; white-space: pre-line;">
+                    ไม่มีคำอธิบาย
+                </p>
+
+                <h4 style="color: #0EF1F1; font-size: 0.95rem; margin-bottom: 10px;">📊 สถิติข้อมูลในโปรเจกต์</h4>
+                <div class="project-meta-info" style="grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 14px; text-align: center;">
+                    <div class="meta-item"><strong id="detail-chapter-count" style="font-size: 1.2rem; color: #fff; display: block;">0</strong>📝 บทนิยาย</div>
+                    <div class="meta-item"><strong id="detail-char-count" style="font-size: 1.2rem; color: #fff; display: block;">0</strong>👥 ตัวละคร</div>
+                    <div class="meta-item"><strong id="detail-wb-count" style="font-size: 1.2rem; color: #fff; display: block;">0</strong>🌍 Worldbuilding</div>
+                </div>
+
+                <h4 style="color: #0EF1F1; font-size: 0.95rem; margin-top: 20px; margin-bottom: 10px;">🚀 ไปยังหัวข้อข้อมูล</h4>
+                <div class="quick-links-grid">
+                    <a id="link-writing" href="#" class="btn-quick-link">
+                        <span class="icon">✍️</span>
+                        <span class="text">เขียนเนื้อเรื่อง</span>
+                    </a>
+                    <a id="link-characters" href="#" class="btn-quick-link">
+                        <span class="icon">👥</span>
+                        <span class="text">จัดการตัวละคร</span>
+                    </a>
+                    <a id="link-worldbuilding" href="#" class="btn-quick-link">
+                        <span class="icon">🌍</span>
+                        <span class="text">จัดการ Worldbuilding</span>
+                    </a>
+                    <a id="link-timeline" href="#" class="btn-quick-link">
+                        <span class="icon">⏳</span>
+                        <span class="text">ไทม์ไลน์เรื่อง</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK Controller -->
     <script type="module" src="script/fictionproject.js"></script>
-    <script type="module" src="script/homepage.js"></script>
 </body>
 </html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiction Archive - Story Timeline</title>
+    
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style_char.css">
+    <link rel="stylesheet" href="css/styleworldbuild.css">
+    <link rel="stylesheet" href="css/profilestyle.css">
+    <link rel="stylesheet" href="css/styletimeline.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <h2>Fiction Archive</h2>
+            </div>
+            <nav class="sidebar-menu">
+                <a href="homepage.html" class="menu-item"><span>🏠</span> Homepage</a>
+                <a href="fictionproject.html" class="menu-item"><span>📚</span> Fiction projects</a>
+                <a href="writing.html" class="menu-item"><span>✍️</span> Writing / Episodes</a>
+                <a href="characters.html" class="menu-item"><span>👥</span> Characters</a>
+                <a href="worldbuilding.html" class="menu-item"><span>🌍</span> Worldbuilding</a>
+                <a href="timeline.html" class="menu-item active"><span>⏳</span> Timeline</a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar" id="user-avatar">U</div>
+                    <div class="user-info">
+                        <span class="username" id="user-name">กำลังโหลด...</span>
+                        <span class="role" id="user-role">ผู้ใช้งาน</span>
+                    </div>
+
+                    <div class="profile-dropdown">
+                        <a href="profile.html" class="dropdown-item"><span>👤</span> โปรไฟล์ (Profile)</a>
+                        <a href="settings.html" class="dropdown-item"><span>⚙️</span> การตั้งค่า</a>
+                        <hr style="border: 0; border-top: 1px solid #142126; margin: 6px 0;">
+                        <a href="#" class="dropdown-item logout-item" id="btn-logout"><span>🚪</span> ออกจากระบบ</a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content" style="grid-column: span 2;">
+            <!-- Header Search & Actions -->
+            <header class="main-header">
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="ค้นหาเหตุการณ์, ช่วงเรื่อง, ตัวละคร...">
+                </div>
+                <button class="btn-create" id="btn-open-timeline-modal">+ เพิ่มเหตุการณ์</button>
+            </header>
+
+            <!-- Page Title & Project Selector -->
+            <section class="section-header project-selector-bar">
+                <div>
+                    <div class="project-title-wrapper">
+                        <h2 style="color: #ffffff; font-size: 1.6rem; margin-bottom: 4px;">ลำดับเหตุการณ์ (Story Timeline)</h2>
+                        <div class="select-project-container">
+                            <label for="select-project">เเลือก Project : </label>
+                            <select id="select-project" class="select-input project-dropdown">
+                                <option value="">กำลังโหลดโปรเจกต์...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p style="color: #657e85; font-size: 0.9rem;">บันทึก ลำดับ และจัดระเบียบเหตุการณ์ทั้งหมดในเรื่องตามลำดับเวลาหรือบทเรียน</p>
+                </div>
+            </section>
+
+            <!-- Timeline View Area -->
+            <div class="timeline-wrapper">
+                <div class="timeline-line"></div>
+                <div id="timeline-container">
+                    <div class="loading-state">กรุณาเลือกโปรเจกต์เพื่อแสดงลำดับเหตุการณ์</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Form สำหรับสร้าง / แก้ไขเหตุการณ์ -->
+    <div class="modal-overlay" id="timeline-modal">
+        <div class="modal-card wb-modal-card">
+            <div class="modal-header">
+                <h3 id="timeline-modal-title">เพิ่มเหตุการณ์ใน Timeline ใหม่</h3>
+                <span class="close-modal" id="btn-close-timeline-modal">&times;</span>
+            </div>
+            <form id="timeline-form">
+                <input type="hidden" id="timeline-id">
+                
+                <div class="form-row">
+                    <div class="form-group" style="flex: 0 0 100px;">
+                        <label for="timeline-order">ลำดับที่ (#)</label>
+                        <input type="number" id="timeline-order" min="1" step="1" placeholder="1" required>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="timeline-title">ชื่อเหตุการณ์ / เหตุการณ์สำคัญ</label>
+                        <input type="text" id="timeline-title" required placeholder="เช่น การล่มสลายของอาณาจักร, การพบกันครั้งแรก">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="timeline-arc">ช่วงของเรื่อง (Arc / Act / บท)</label>
+                        <input type="text" id="timeline-arc" required placeholder="เช่น บทนำ, Act 1, ภาคเมืองหลวง, Flashback">
+                    </div>
+                    <div class="form-group">
+                        <label for="timeline-date">เวลาในเรื่อง (In-Universe Time)</label>
+                        <input type="text" id="timeline-date" placeholder="เช่น ศักราชที่ 420, วันที่ 3 เดือน 5">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeline-characters">ตัวละครที่เกี่ยวข้อง</label>
+                    <input type="text" id="timeline-characters" placeholder="เช่น อเล็กซ์, เอเลน่า, สมาคมจอมเวท">
+                </div>
+
+                <div class="form-group">
+                    <label for="timeline-desc">รายละเอียดเหตุการณ์</label>
+                    <textarea id="timeline-desc" rows="3" placeholder="สรุปสิ่งที่เกิดขึ้นในเหตุการณ์นี้..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeline-impact">ผลกระทบต่อเนื้อเรื่อง (Plot Significance)</label>
+                    <textarea id="timeline-impact" rows="2" placeholder="เหตุการณ์นี้ส่งผลอย่างไรต่อตัวละครหรือฉากถัดไป..."></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" id="btn-cancel-timeline-modal">ยกเลิก</button>
+                    <button type="submit" class="btn-auth">บันทึกเหตุการณ์</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase Controller Module -->
+    <script type="module" src="script/timeline.js"></script>
+</body>
+</html>

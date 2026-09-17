@@ -1,0 +1,138 @@
+/* --- Filter Buttons --- */
+.filter-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.btn-filter {
+    background-color: #0b1114;
+    border: 1px solid #142126;
+    color: #657e85;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-filter:hover {
+    color: #0EF1F1;
+    border-color: #0EF1F1;
+    background-color: #111e24;
+}
+
+.btn-filter.active {
+    background-color: rgba(14, 241, 241, 0.15);
+    color: #0EF1F1;
+    border-color: #0EF1F1;
+    box-shadow: 0 0 10px rgba(14, 241, 241, 0.2);
+}
+
+/* --- Project Meta Information Grid --- */
+.project-meta-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+    margin-bottom: 16px;
+    padding: 10px;
+    background-color: #050b0c;
+    border-radius: 8px;
+    border: 1px solid #142126;
+}
+
+.meta-item {
+    font-size: 0.78rem;
+    color: #8a9e9e;
+}
+
+/* ธีมสีปกการ์ดเพิ่มเติม */
+.card-cover.scifi {
+    background: linear-gradient(to bottom, #1f2937, #0b1114);
+}
+
+/* --- Card Action Buttons (แก้ไข / ลบ) --- */
+.card-action-bar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #142126;
+}
+
+.btn-card-action {
+    background: transparent;
+    border: 1px solid #142126;
+    color: #8a9e9e;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-card-action:hover {
+    color: #0EF1F1;
+    border-color: #0EF1F1;
+    background-color: rgba(14, 241, 241, 0.1);
+}
+
+.btn-card-action.delete:hover {
+    color: #ff5252;
+    border-color: #ff5252;
+    background-color: rgba(255, 82, 82, 0.1);
+}
+
+/* --- Quick Links & Stat Card inside Detail Modal --- */
+.quick-links-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.btn-quick-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 10px;
+    background-color: #111e24;
+    border: 1px solid #142126;
+    border-radius: 10px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-quick-link:hover {
+    border-color: #0EF1F1;
+    background-color: rgba(14, 241, 241, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(14, 241, 241, 0.15);
+}
+
+.btn-quick-link .icon {
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+}
+
+.btn-quick-link .text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #b2c4c7;
+}
+
+.btn-quick-link:hover .text {
+    color: #0EF1F1;
+}
+
+@media (max-width: 600px) {
+    .quick-links-grid {
+        grid-template-columns: 1fr;
+    }
+}
