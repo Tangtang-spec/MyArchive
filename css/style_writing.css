@@ -123,6 +123,70 @@
     border-color: #0EF1F1;
 }
 
+/* --- Reading Mode Button & Reader Page Styles --- */
+#btn-reading-mode {
+    background-color: #111e24;
+    color: #0EF1F1;
+    border: 1px solid #142126;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+#btn-reading-mode:hover {
+    background-color: rgba(14, 241, 241, 0.1);
+    border-color: #0EF1F1;
+    box-shadow: 0 0 12px rgba(14, 241, 241, 0.25);
+}
+
+#reader-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.reader-chapter-card {
+    background-color: #081014;
+    border: 1px solid #142126;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: border-color 0.2s ease;
+}
+
+.reader-chapter-card:hover {
+    border-color: rgba(14, 241, 241, 0.3);
+}
+
+.reader-chapter-badge {
+    color: #0EF1F1;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.reader-chapter-title {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #142126;
+}
+
+.reader-chapter-content {
+    color: #d0e0e3;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* --- Responsive Layout --- */
 @media (max-width: 768px) {
     .episode-item-card {
         flex-wrap: wrap;
@@ -131,5 +195,18 @@
     .episode-meta {
         width: 100%;
         justify-content: space-between;
+    }
+
+    .reader-chapter-card {
+        padding: 20px;
+    }
+
+    .reader-chapter-title {
+        font-size: 1.25rem;
+    }
+
+    .reader-chapter-content {
+        font-size: 0.95rem;
+        line-height: 1.7;
     }
 }

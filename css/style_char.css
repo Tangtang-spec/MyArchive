@@ -128,14 +128,17 @@
     gap: 12px;
 }
 
+/* --- อัปเดตสไตล์การย่อคำอธิบายตัวละคร --- */
 .char-desc {
     color: #8a9e9e;
     font-size: 0.88rem;
     line-height: 1.4;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2; /* กำหนดจำนวนบรรทัดที่ต้องการย่อ (เช่น 2 หรือ 3 บรรทัด) */
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word; /* ป้องกันข้อความยาวแบบไม่มีเว้นวรรคดันขอบการ์ด */
 }
 
 .char-details {
@@ -151,6 +154,20 @@
     padding: 6px 10px;
     border-radius: 6px;
     border: 1px solid #142126;
+    
+    /* เพิ่ม 3 บรรทัดนี้เพื่อย่อข้อความ */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.detail-badge.ability-badge {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* จำกัดจำนวนบรรทัดที่ต้องการแสดง */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
 }
 
 .detail-badge span {

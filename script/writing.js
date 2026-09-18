@@ -19,21 +19,22 @@ import {
     serverTimestamp 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// อ่าน Parameter projectId จาก URL
+// อ่าน Parameter projectId จาก URL[cite: 12]
 let currentProjectId = new URLSearchParams(window.location.search).get("projectId");
 
-// DOM Elements
+// DOM Elements[cite: 12]
 const episodesContainer = document.getElementById("episodes-container");
 const projectTitleHeading = document.getElementById("project-title-heading");
 const projectSelectDropdown = document.getElementById("project-select-dropdown");
 const searchInput = document.getElementById("search-input");
+const btnReadingMode = document.getElementById("btn-reading-mode");
 
-// User Profile
+// User Profile[cite: 12]
 const userNameEl = document.getElementById("user-name");
 const userAvatarEl = document.getElementById("user-avatar");
 const btnLogout = document.getElementById("btn-logout");
 
-// Modal Elements
+// Modal Elements[cite: 12]
 const episodeModal = document.getElementById("episode-modal");
 const btnOpenModal = document.getElementById("btn-open-modal");
 const btnCloseModal = document.getElementById("btn-close-modal");
@@ -46,44 +47,61 @@ let rawEpisodes = [];
 let searchQuery = "";
 let unsubscribeEpisodes = null;
 
-// --- Sidebar Toggle Logic ---
+// --- Sidebar Toggle Logic ---[cite: 12]
 const sidebar = document.getElementById("sidebar");
 const btnToggleSidebar = document.getElementById("btn-toggle-sidebar");
 const dashboardContainer = document.querySelector(".dashboard-container");
 
 if (btnToggleSidebar && sidebar) {
-    // ดึงสถานะเดิมจาก localStorage (ถ้ามี)
+    // ดึงสถานะเดิมจาก localStorage (ถ้ามี)[cite: 12]
     const isCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
     if (isCollapsed) {
         sidebar.classList.add("collapsed");
         if (dashboardContainer) dashboardContainer.classList.add("sidebar-collapsed");
     }
 
-    // อีเวนต์คลิกปุ่มเพื่อเปิด/ปิด
+    // อีเวนต์คลิกปุ่มเพื่อเปิด/ปิด[cite: 12]
     btnToggleSidebar.addEventListener("click", () => {
         sidebar.classList.toggle("collapsed");
         if (dashboardContainer) dashboardContainer.classList.toggle("sidebar-collapsed");
 
-        // บันทึกสถานะลง localStorage
+        // บันทึกสถานะลง localStorage[cite: 12]
         const collapsedState = sidebar.classList.contains("collapsed");
         localStorage.setItem("sidebarCollapsed", collapsedState);
     });
 }
 
-// --- 1. Auth Checker & Initialization ---
+// --- Helper: อัปเดต URL ปุ่มโหมดอ่าน ---
+function updateReaderLink(projectId) {
+    if (btnReadingMode) {
+        if (projectId) {
+            btnReadingMode.href = `reader.html?projectId=${projectId}`;
+            btnReadingMode.style.opacity = "1";
+            btnReadingMode.style.pointerEvents = "auto";
+        } else {
+            btnReadingMode.href = "#";
+            btnReadingMode.style.opacity = "0.5";
+            btnReadingMode.style.pointerEvents = "none";
+        }
+    }
+}
+
+// --- 1. Auth Checker & Initialization ---[cite: 12]
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         currentUser = user;
         updateUserProfile(user);
 
-        // ดึงรายชื่อโปรเจกต์ทั้งหมดมาใส่ Dropdown
+        // ดึงรายชื่อโปรเจกต์ทั้งหมดมาใส่ Dropdown[cite: 12]
         await loadProjectDropdownOptions(user.uid);
 
         if (currentProjectId) {
             if (projectSelectDropdown) projectSelectDropdown.value = currentProjectId;
+            updateReaderLink(currentProjectId);
             await fetchProjectHeader(user.uid, currentProjectId);
             listenToEpisodes(user.uid, currentProjectId);
         } else {
+            updateReaderLink(null);
             episodesContainer.innerHTML = `<div class="empty-state">กรุณาเลือกโปรเจกต์จากเมนูด้านบนเพื่อเริ่มเขียน</div>`;
         }
     } else {
@@ -97,7 +115,7 @@ function updateUserProfile(user) {
     if (userAvatarEl) userAvatarEl.textContent = name.charAt(0).toUpperCase();
 }
 
-// --- 2. โหลดรายชื่อโปรเจกต์ใส่ Dropdown ---
+// --- 2. โหลดรายชื่อโปรเจกต์ใส่ Dropdown ---[cite: 12]
 async function loadProjectDropdownOptions(userId) {
     if (!projectSelectDropdown) return;
     try {
@@ -124,10 +142,12 @@ async function loadProjectDropdownOptions(userId) {
     }
 }
 
-// Event เมื่อเลือกเปลี่ยนโปรเจกต์จาก Dropdown
+// Event เมื่อเลือกเปลี่ยนโปรเจกต์จาก Dropdown[cite: 12]
 if (projectSelectDropdown) {
     projectSelectDropdown.addEventListener("change", (e) => {
         const selectedId = e.target.value;
+        updateReaderLink(selectedId);
+
         if (selectedId) {
             currentProjectId = selectedId;
             window.history.pushState({}, "", `writing.html?projectId=${selectedId}`);
@@ -144,7 +164,7 @@ if (projectSelectDropdown) {
     });
 }
 
-// --- 3. ดึงข้อมูลชื่อโปรเจกต์ ---
+// --- 3. ดึงข้อมูลชื่อโปรเจกต์ ---[cite: 12]
 async function fetchProjectHeader(userId, pId) {
     try {
         const projectRef = doc(db, "users", userId, "projects", pId);
@@ -160,7 +180,7 @@ async function fetchProjectHeader(userId, pId) {
     }
 }
 
-// --- 4. Real-time Listener ดึงตอนทั้งหมด เรียงตาม order ---
+// --- 4. Real-time Listener ดึงตอนทั้งหมด เรียงตาม order ---[cite: 12]
 function listenToEpisodes(userId, pId) {
     if (unsubscribeEpisodes) {
         unsubscribeEpisodes();
@@ -186,7 +206,7 @@ function listenToEpisodes(userId, pId) {
     });
 }
 
-// --- 5. Render & Search ---
+// --- 5. Render & Search ---[cite: 12]
 function renderEpisodes() {
     if (!currentProjectId) {
         episodesContainer.innerHTML = `<div class="empty-state">กรุณาเลือกโปรเจกต์จากเมนูด้านบนเพื่อเริ่มเขียน</div>`;
@@ -249,22 +269,22 @@ function createEpisodeCard(ep, index, total) {
         </div>
     `;
 
-    // Event: เลื่อนลำดับขึ้น
+    // Event: เลื่อนลำดับขึ้น[cite: 12]
     const btnUp = card.querySelector(".btn-move-up");
     if (btnUp) {
         btnUp.addEventListener("click", () => swapOrder(index, index - 1));
     }
 
-    // Event: เลื่อนลำดับลง
+    // Event: เลื่อนลำดับลง[cite: 12]
     const btnDown = card.querySelector(".btn-move-down");
     if (btnDown) {
         btnDown.addEventListener("click", () => swapOrder(index, index + 1));
     }
 
-    // Event: แก้ไขตอน
+    // Event: แก้ไขตอน[cite: 12]
     card.querySelector(".btn-edit").addEventListener("click", () => openModal(ep));
 
-    // Event: ลบตอน
+    // Event: ลบตอน[cite: 12]
     card.querySelector(".btn-delete").addEventListener("click", async () => {
         if (confirm(`คุณต้องการลบตอน "${ep.title}" ใช่หรือไม่?`)) {
             try {
@@ -279,7 +299,7 @@ function createEpisodeCard(ep, index, total) {
     return card;
 }
 
-// --- 6. สลับลำดับ (Reorder Swapping) ---
+// --- 6. สลับลำดับ (Reorder Swapping) ---[cite: 12]
 async function swapOrder(indexA, indexB) {
     if (!currentProjectId) return;
     if (indexA < 0 || indexB < 0 || indexA >= rawEpisodes.length || indexB >= rawEpisodes.length) return;
@@ -302,7 +322,7 @@ async function swapOrder(indexA, indexB) {
     }
 }
 
-// อัปเดตจำนวนบทกลับไปที่ Document หลักของ Project
+// อัปเดตจำนวนบทกลับไปที่ Document หลักของ Project[cite: 12]
 async function updateChapterCountInProject(count) {
     if (!currentUser || !currentProjectId) return;
     try {
@@ -313,7 +333,7 @@ async function updateChapterCountInProject(count) {
     }
 }
 
-// --- 7. Modal Controller ---
+// --- 7. Modal Controller ---[cite: 12]
 function openModal(ep = null) {
     episodeForm.reset();
 
@@ -352,7 +372,7 @@ episodeModal.addEventListener("click", (e) => {
     if (e.target === episodeModal) closeModal();
 });
 
-// บันทึก Episode
+// บันทึก Episode[cite: 12]
 episodeForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!currentUser || !currentProjectId) return;
@@ -387,13 +407,13 @@ episodeForm.addEventListener("submit", async (e) => {
     }
 });
 
-// Search
+// Search[cite: 12]
 searchInput.addEventListener("input", (e) => {
     searchQuery = e.target.value;
     renderEpisodes();
 });
 
-// Logout
+// Logout[cite: 12]
 if (btnLogout) {
     btnLogout.addEventListener("click", (e) => {
         e.preventDefault();

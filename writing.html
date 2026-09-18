@@ -56,6 +56,13 @@
                         <span class="username" id="user-name">กำลังโหลด...</span>
                         <span class="role" id="user-role">ผู้ใช้งาน</span>
                     </div>
+
+                    <div class="profile-dropdown">
+                        <a href="profile.html" class="dropdown-item"><span>👤</span> โปรไฟล์ (Profile)</a>
+                        <a href="settings.html" class="dropdown-item"><span>⚙️</span> การตั้งค่า</a>
+                        <hr style="border: 0; border-top: 1px solid #142126; margin: 6px 0;">
+                        <a href="#" class="dropdown-item logout-item" id="btn-logout"><span>🚪</span> ออกจากระบบ</a>
+                    </div>
                 </div>
             </div>
         </aside>
@@ -66,7 +73,10 @@
                 <div class="search-bar">
                     <input type="text" id="search-input" placeholder="ค้นหาชื่อตอน หรือเนื้อหาในบท...">
                 </div>
-                <button class="btn-create" id="btn-open-modal">+ เพิ่มตอนใหม่ (Episode)</button>
+                <div style="display: flex; gap: 10px;">
+                    <a href="#" id="btn-reading-mode" class="btn-create" style="background-color: #111e24; color: #0EF1F1; border: 1px solid #142126; text-decoration: none; display: inline-flex; align-items: center;">📖 อ่านแบบต่อเนื่อง</a>
+                    <button class="btn-create" id="btn-open-modal">+ เพิ่มตอนใหม่ (Episode)</button>
+                </div>
             </header>
 
         <section class="section-header">
