@@ -444,3 +444,96 @@ textarea:focus {
     border: 1px dashed #142126;
     border-radius: 12px;
 }
+
+/* ==========================================
+   Responsive Design สำหรับหน้าจอโทรศัพท์ (<= 768px)
+   ========================================== */
+@media (max-width: 768px) {
+    /* 1. ปรับ Layout หลักเปลี่ยนเป็นแนวตั้ง */
+    .dashboard-container {
+        display: flex;
+        flex-direction: column;
+        padding: 12px;
+        gap: 16px;
+    }
+
+    /* 2. ปรับ Sidebar ให้อยู่ด้านบนสุดและเลื่อนเมนูแนวนอนได้ */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 15px;
+    }
+
+    .sidebar-menu {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 8px;
+        padding-bottom: 8px;
+    }
+
+    .menu-item {
+        display: inline-flex;
+        padding: 8px 14px;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+    }
+
+    .sidebar-footer {
+        margin-top: 10px;
+    }
+
+    /* 3. ปรับ Main Content และ Header ให้ยืดเต็มความกว้าง */
+    .main-content {
+        grid-column: span 1 !important;
+        width: 100%;
+    }
+
+    .main-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    .btn-create {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* 4. ปรับ Grid โปรเจกต์เป็น 1 การ์ดต่อแถว */
+    .projects-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px;
+    }
+
+    /* 5. ปรับการแสดงผล Right Panel ด้านขวา */
+    .right-panel {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* 6. ปรับขนาดหน้าต่าง Modal ป๊อปอัพให้พอดีหน้าจอ */
+    .modal-card {
+        width: 92% !important;
+        max-width: 100%;
+        padding: 16px;
+        margin: 20px auto;
+    }
+
+    /* 7. ปรับสถิติใน Modal รายละเอียดให้แสดงตัวเลขชัดเจน */
+    .project-meta-info {
+        grid-template-columns: repeat(3, 1fr) !important;
+        padding: 10px !important;
+        font-size: 0.75rem;
+    }
+
+    .quick-links-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px;
+    }
+}
