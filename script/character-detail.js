@@ -36,6 +36,30 @@ const formPsychology = document.getElementById("form-edit-psychology");
 const formBackstory = document.getElementById("form-edit-backstory");
 const formAbilities = document.getElementById("form-edit-abilities");
 
+// --- Sidebar Toggle Logic ---
+const sidebar = document.getElementById("sidebar");
+const btnToggleSidebar = document.getElementById("btn-toggle-sidebar");
+const dashboardContainer = document.querySelector(".dashboard-container");
+
+if (btnToggleSidebar && sidebar) {
+    // ดึงสถานะเดิมจาก localStorage (ถ้ามี)
+    const isCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
+    if (isCollapsed) {
+        sidebar.classList.add("collapsed");
+        if (dashboardContainer) dashboardContainer.classList.add("sidebar-collapsed");
+    }
+
+    // อีเวนต์คลิกปุ่มเพื่อเปิด/ปิด
+    btnToggleSidebar.addEventListener("click", () => {
+        sidebar.classList.toggle("collapsed");
+        if (dashboardContainer) dashboardContainer.classList.toggle("sidebar-collapsed");
+
+        // บันทึกสถานะลง localStorage
+        const collapsedState = sidebar.classList.contains("collapsed");
+        localStorage.setItem("sidebarCollapsed", collapsedState);
+    });
+}
+
 // Global State
 let currentUser = null;
 let charId = null;

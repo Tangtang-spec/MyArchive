@@ -15,32 +15,44 @@
 <body>
     <div class="dashboard-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-brand">
                 <h2>Fiction Archive</h2>
+                <button type="button" class="btn-sidebar-toggle" id="btn-toggle-sidebar" title="พับ/กาง เมนู">◀</button>
             </div>
             <nav class="sidebar-menu">
-                <a href="homepage.html" class="menu-item"><span>🏠</span> Homepage</a>
-                <a href="fictionproject.html" class="menu-item active"><span>📚</span> Fiction projects</a>
-                <a href="writing.html" class="menu-item"><span>✍️</span> Writing / Episodes</a>
-                <a href="characters.html" class="menu-item"><span>👥</span> Characters</a>
-                <a href="worldbuilding.html" class="menu-item"><span>🌍</span> Worldbuilding</a>
-                <a href="timeline.html" class="menu-item"><span>⏳</span> Timeline</a>
+                <a href="homepage.html" class="menu-item">
+                    <span class="icon">🏠</span>
+                    <span class="menu-text">Homepage</span>
+                </a>
+                <a href="fictionproject.html" class="menu-item active">
+                    <span class="icon">📚</span>
+                    <span class="menu-text">Fiction projects</span>
+                </a>
+                <a href="writing.html" class="menu-item">
+                    <span class="icon">✍️</span>
+                    <span class="menu-text">Writing / Episodes</span>
+                </a>
+                <a href="characters.html" class="menu-item">
+                    <span class="icon">👥</span>
+                    <span class="menu-text">Characters</span>
+                </a>
+                <a href="worldbuilding.html" class="menu-item">
+                    <span class="icon">🌍</span>
+                    <span class="menu-text">Worldbuilding</span>
+                </a>
+                <a href="timeline.html" class="menu-item">
+                    <span class="icon">⏳</span>
+                    <span class="menu-text">Timeline</span>
+                </a>
             </nav>
-
+            
             <div class="sidebar-footer">
                 <div class="user-profile">
                     <div class="avatar" id="user-avatar">U</div>
                     <div class="user-info">
                         <span class="username" id="user-name">กำลังโหลด...</span>
                         <span class="role" id="user-role">ผู้ใช้งาน</span>
-                    </div>
-
-                    <div class="profile-dropdown">
-                        <a href="profile.html" class="dropdown-item"><span>👤</span> โปรไฟล์ (Profile)</a>
-                        <a href="settings.html" class="dropdown-item"><span>⚙️</span> การตั้งค่า</a>
-                        <hr style="border: 0; border-top: 1px solid #142126; margin: 6px 0;">
-                        <a href="#" class="dropdown-item logout-item" id="btn-logout"><span>🚪</span> ออกจากระบบ</a>
                     </div>
                 </div>
             </div>

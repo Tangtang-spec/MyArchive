@@ -131,8 +131,22 @@
     color: #0EF1F1;
 }
 
-@media (max-width: 600px) {
-    .quick-links-grid {
-        grid-template-columns: 1fr;
+/* --- ขยายความกว้างของ Card โปรเจกต์ --- */
+.projects-grid {
+    display: grid;
+    /* ปรับขนาดขั้นต่ำของ Card จากเดิม (ประมาณ 250-280px) เป็น 360px หรือ 400px เพื่อให้การ์ดกว้างขึ้น */
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 20px;
+}
+
+/* ปรับแต่งตัวการ์ดให้ยืดหยุ่นและสมส่วนขึ้น */
+.pc-project-card {
+    width: 100%;
+    min-height: 220px; /* เพิ่มความสูงขั้นต่ำให้สมดุลกับความกว้างที่เพิ่มขึ้น */
+}
+
+@media (min-width: 1024px) {
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr); /* บังคับแบ่งเป็น 2 คอลัมน์กว้างๆ */
     }
 }

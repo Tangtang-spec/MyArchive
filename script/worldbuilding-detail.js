@@ -23,6 +23,30 @@ const formOverview = document.getElementById("form-overview");
 const formCategory = document.getElementById("form-category");
 const formContent = document.getElementById("form-content");
 
+// --- Sidebar Toggle Logic ---
+const sidebar = document.getElementById("sidebar");
+const btnToggleSidebar = document.getElementById("btn-toggle-sidebar");
+const dashboardContainer = document.querySelector(".dashboard-container");
+
+if (btnToggleSidebar && sidebar) {
+    // ดึงสถานะเดิมจาก localStorage (ถ้ามี)
+    const isCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
+    if (isCollapsed) {
+        sidebar.classList.add("collapsed");
+        if (dashboardContainer) dashboardContainer.classList.add("sidebar-collapsed");
+    }
+
+    // อีเวนต์คลิกปุ่มเพื่อเปิด/ปิด
+    btnToggleSidebar.addEventListener("click", () => {
+        sidebar.classList.toggle("collapsed");
+        if (dashboardContainer) dashboardContainer.classList.toggle("sidebar-collapsed");
+
+        // บันทึกสถานะลง localStorage
+        const collapsedState = sidebar.classList.contains("collapsed");
+        localStorage.setItem("sidebarCollapsed", collapsedState);
+    });
+}
+
 // State
 let currentUser = null;
 let wbId = null;

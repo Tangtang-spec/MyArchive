@@ -445,6 +445,78 @@ textarea:focus {
     border-radius: 12px;
 }
 
+/* --- Sidebar & Container Transitions --- */
+.dashboard-container {
+    transition: grid-template-columns 0.3s ease;
+}
+
+.sidebar {
+    transition: width 0.3s ease, padding 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* ปุ่ม Toggle Sidebar */
+.btn-sidebar-toggle {
+    background: transparent;
+    border: none;
+    color: #7b8e91;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    transition: transform 0.3s ease, color 0.2s, background 0.2s;
+}
+
+.btn-sidebar-toggle:hover {
+    color: #0EF1F1;
+    background: rgba(14, 241, 241, 0.1);
+}
+
+/* --- สถานะเมื่อ Sidebar ถูกพับ (Collapsed) --- */
+.dashboard-container.sidebar-collapsed {
+    grid-template-columns: 80px 1fr 280px; /* ปรับขนาดคอลัมน์แรกให้เล็กลง */
+}
+
+/* ซ่อนข้อความเมื่อถูกพับ */
+.sidebar.collapsed .sidebar-brand h2,
+.sidebar.collapsed .menu-text,
+.sidebar.collapsed .user-info {
+    display: none;
+}
+
+.sidebar.collapsed {
+    padding: 20px 10px;
+}
+
+.sidebar.collapsed .sidebar-brand {
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.sidebar.collapsed .btn-sidebar-toggle {
+    transform: rotate(180deg); /* หมุนลูกศรไปทางขวา */
+}
+
+.sidebar.collapsed .menu-item {
+    justify-content: center;
+    padding: 12px 0;
+}
+
+.sidebar.collapsed .menu-item .icon {
+    font-size: 1.3rem;
+}
+
+.sidebar.collapsed .user-profile {
+    justify-content: center;
+}
+
 /* ==========================================
    Responsive Design สำหรับหน้าจอโทรศัพท์ (<= 768px)
    ========================================== */

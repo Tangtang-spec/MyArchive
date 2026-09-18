@@ -45,6 +45,31 @@ let rawProjects = [];
 let activeGenre = "all";
 let searchQuery = "";
 
+// --- Sidebar Toggle Logic ---
+const sidebar = document.getElementById("sidebar");
+const btnToggleSidebar = document.getElementById("btn-toggle-sidebar");
+const dashboardContainer = document.querySelector(".dashboard-container");
+
+if (btnToggleSidebar && sidebar) {
+    // ดึงสถานะเดิมจาก localStorage (ถ้ามี)
+    const isCollapsed = localStorage.getItem("sidebarCollapsed") === "true";
+    if (isCollapsed) {
+        sidebar.classList.add("collapsed");
+        if (dashboardContainer) dashboardContainer.classList.add("sidebar-collapsed");
+    }
+
+    // อีเวนต์คลิกปุ่มเพื่อเปิด/ปิด
+    btnToggleSidebar.addEventListener("click", () => {
+        sidebar.classList.toggle("collapsed");
+        if (dashboardContainer) dashboardContainer.classList.toggle("sidebar-collapsed");
+
+        // บันทึกสถานะลง localStorage
+        const collapsedState = sidebar.classList.contains("collapsed");
+        localStorage.setItem("sidebarCollapsed", collapsedState);
+    });
+}
+
+
 // --- 1. Auth State Observer ---
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -62,21 +87,44 @@ function updateUserProfile(user) {
     if (userAvatarEl) userAvatarEl.textContent = name.charAt(0).toUpperCase();
 }
 
-// --- 2. Real-time Listener ---
+// --- 2. Real-time Listener (อัปเดตดึงจำนวนจริงจาก Sub-collections) ---
 function listenToProjects(userId) {
     const projectsRef = collection(db, "users", userId, "projects");
     const q = query(projectsRef, orderBy("updatedAt", "desc"));
 
-    onSnapshot(q, (snapshot) => {
-        rawProjects = [];
-        snapshot.forEach((docSnap) => {
-            rawProjects.push({
-                id: docSnap.id,
-                ...docSnap.data()
-            });
-        });
+    onSnapshot(q, async (snapshot) => {
+        try {
+            // ดึงจำนวนนับจริงจาก Sub-collections ของทุกโปรเจกต์แบบ Parallel
+            const projectPromises = snapshot.docs.map(async (docSnap) => {
+                const data = docSnap.data();
+                const projectId = docSnap.id;
+                const basePath = `users/${userId}/projects/${projectId}`;
 
-        renderProjects();
+                const epRef = collection(db, `${basePath}/episodes`);
+                const charRef = collection(db, `${basePath}/characters`);
+                const wbRef = collection(db, `${basePath}/worldbuilding`);
+
+                const [epSnap, charSnap, wbSnap] = await Promise.all([
+                    getCountFromServer(epRef).catch(() => ({ data: () => ({ count: data.chapterCount || 0 }) })),
+                    getCountFromServer(charRef).catch(() => ({ data: () => ({ count: data.characterCount || 0 }) })),
+                    getCountFromServer(wbRef).catch(() => ({ data: () => ({ count: data.worldbuildingCount || 0 }) }))
+                ]);
+
+                return {
+                    id: projectId,
+                    ...data,
+                    chapterCount: epSnap.data().count,
+                    characterCount: charSnap.data().count,
+                    worldbuildingCount: wbSnap.data().count
+                };
+            });
+
+            rawProjects = await Promise.all(projectPromises);
+            renderProjects();
+        } catch (error) {
+            console.error("Error fetching project counts:", error);
+            projectsContainer.innerHTML = `<div class="empty-state">เกิดข้อผิดพลาดในการดึงข้อมูล</div>`;
+        }
     }, (error) => {
         console.error("Error fetching projects:", error);
         projectsContainer.innerHTML = `<div class="empty-state">เกิดข้อผิดพลาดในการดึงข้อมูล</div>`;
